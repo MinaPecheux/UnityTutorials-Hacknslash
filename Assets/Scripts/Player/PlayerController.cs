@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Player
 {
@@ -8,23 +9,40 @@ namespace Player
     {
         private CharacterController _controller;
 
-        #region Variables: Movement
-        private const float _MOVE_SPEED = 5f;
-        private Vector3 _move;
+        #region Variables: Inputs
+        private DefaultInputActions _inputActions;
+        private InputAction _moveAction;
         #endregion
 
-        private void Start()
+        #region Variables: Movement
+        private const float _MOVE_SPEED = 5f;
+        private Vector2 _move;
+        #endregion
+
+        private void Awake()
         {
+            _inputActions = new DefaultInputActions();
             _controller = GetComponent<CharacterController>();
+        }
+
+        private void OnEnable()
+        {
+            _moveAction = _inputActions.Player.Move;
+            _moveAction.Enable();
+        }
+
+        private void OnDisable()
+        {
+            _moveAction.Disable();
         }
 
         private void Update()
         {
-            _move = new Vector3(
-                Input.GetAxis("Horizontal"),
-                0,
-                Input.GetAxis("Vertical")).normalized;
-            _controller.Move(_move * Time.deltaTime * _MOVE_SPEED);
+            _move = _moveAction.ReadValue<Vector2>();
+            _controller.Move(
+                new Vector3(_move.x, 0f, _move.y) *
+                Time.deltaTime *
+                _MOVE_SPEED);
         }
     }
 
