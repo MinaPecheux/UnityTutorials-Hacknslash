@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e717918787e0b40c8a13564493d6dc61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 1380147724}
+  _animator: {fileID: 1380147722}
 --- !u!143 &140526370
 CharacterController:
   m_ObjectHideFlags: 0
@@ -881,7 +881,7 @@ Transform:
   m_Father: {fileID: 677559193}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &1380147724 stripped
+--- !u!95 &1380147722 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 87df59ee447b14b0f84856c43e95df15, type: 3}
   m_PrefabInstance: {fileID: 1549200315}

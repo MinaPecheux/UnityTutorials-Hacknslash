@@ -4,8 +4,8 @@ ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
-      74: -203655887218126122
-    second: Run
+      74: -9121621101649706817
+    second: Running
   externalObjects: {}
   materials:
     materialImportMode: 0
@@ -35,7 +35,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Run
+      name: Running
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0

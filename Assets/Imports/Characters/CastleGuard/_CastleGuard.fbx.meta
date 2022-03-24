@@ -4,31 +4,16 @@ ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
-      74: -203655887218126122
-    second: TPose
+      74: -3336958525038817464
+    second: _CastleGuard
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Guard_03
-    second: {fileID: 2100000, guid: 8feec847610e24197b0b510ae60cc05d, type: 2}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Guard_03__diffuse
-    second: {fileID: 2800000, guid: ecd7f063fb14c482384e22cda318b243, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Guard_03__normal
-    second: {fileID: 2800000, guid: c2b93d41c3f5b4f2688c20e7a4c5c98d, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Guard_03__specular
-    second: {fileID: 2800000, guid: 0eb043f2eff17423a88332825650d0bb, type: 3}
+    second: {fileID: 2100000, guid: e87da3561083049a68b4efbe9bf6c8e7, type: 2}
   materials:
-    materialImportMode: 0
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -55,7 +40,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: TPose
+      name: _CastleGuard
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
@@ -146,7 +131,7 @@ ModelImporter:
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 2
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   additionalBone: 0
   userData: 
