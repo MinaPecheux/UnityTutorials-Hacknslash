@@ -25,9 +25,7 @@ namespace Player
         #endregion
 
         #region Variables: Attack
-        private const float _COMBO_MIN_DELAY = 0.1f;
         private const int _COMBO_MAX_STEP = 2;
-        private float _lastComboTime;
         private int _comboHitStep;
         private Coroutine _comboAttackResetCoroutine;
         private bool _attacking;
@@ -99,10 +97,10 @@ namespace Player
         private void _OnAttackAction(InputAction.CallbackContext obj)
         {
             _attacking = true;
-            float t = Time.time;
             if (_comboHitStep == _COMBO_MAX_STEP)
                 return;
-            if (_comboHitStep == -1 || t - _lastComboTime >= _COMBO_MIN_DELAY)
+            float t = _animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
+            if (_comboHitStep == -1 || (t >= 0.1f && t <= 0.8f))
             {
                 if (_comboAttackResetCoroutine != null)
                     StopCoroutine(_comboAttackResetCoroutine);
@@ -110,7 +108,6 @@ namespace Player
                 _animator.SetTrigger($"Attack{_comboHitStep}");
                 _comboAttackResetCoroutine = StartCoroutine(_ResettingAttackCombo());
             }
-            _lastComboTime = t;
         }
 
         private IEnumerator _ResettingAttackCombo()
