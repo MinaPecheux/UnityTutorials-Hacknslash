@@ -9,6 +9,7 @@ namespace Player
     public class PlayerController : MonoBehaviour
     {
         private CharacterController _controller;
+        [SerializeField] private PlayerData _data;
         [SerializeField] private Animator _animator;
         private Transform _animatorTransform;
 
@@ -19,7 +20,6 @@ namespace Player
         #endregion
 
         #region Variables: Movement
-        private const float _MOVE_SPEED = 5f;
         private Vector2 _move;
         private bool _running;
         #endregion
@@ -85,7 +85,7 @@ namespace Player
                 _controller.Move(
                     v *
                     Time.deltaTime *
-                    _MOVE_SPEED);
+                    _data.moveSpeed);
             }
             else if (_running)
             {

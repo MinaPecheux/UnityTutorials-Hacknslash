@@ -5,7 +5,13 @@ namespace Enemy
 
     public class EnemyManager : MonoBehaviour
     {
+        [SerializeField] private EnemyData _data;
         private float _hp = 6;
+
+        private void Awake()
+        {
+            _hp = _data.healthpoints;
+        }
 
         public void TakeHit(float amount)
         {
