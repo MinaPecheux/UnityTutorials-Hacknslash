@@ -106,20 +106,15 @@ namespace Player
                     StopCoroutine(_comboAttackResetCoroutine);
                 _comboHitStep++;
                 _animator.SetTrigger($"Attack{_comboHitStep}");
-                _comboAttackResetCoroutine = StartCoroutine(_ResettingAttackCombo());
+                _comboAttackResetCoroutine = StartCoroutine(
+                    Tools.Utils.WaitingForCurrentAnimation(
+                        _animator,
+                        () =>
+                        {
+                            _comboHitStep = -1;
+                            _attacking = false;
+                        }));
             }
-        }
-
-        private IEnumerator _ResettingAttackCombo()
-        {
-            yield return new WaitForEndOfFrame();
-            yield return new WaitForSeconds(
-                _animator.GetAnimatorTransitionInfo(0).duration);
-            yield return new WaitForEndOfFrame();
-            yield return new WaitForSeconds(
-                _animator.GetCurrentAnimatorStateInfo(0).length - 0.1f);
-            _comboHitStep = -1;
-            _attacking = false;
         }
     }
 

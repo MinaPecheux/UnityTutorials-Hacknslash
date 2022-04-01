@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 626a56ffcbca84de6957c928ab313b8f, type: 3}
-  m_Name: Player
+  m_Script: {fileID: 11500000, guid: dce46fcc74e1b4d7f89d1bd3c8cd6b68, type: 3}
+  m_Name: Brute
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  attackRange: 0.5
-  attackDamage: 2
+  healthpoints: 6
+  moveSpeed: 0.35
+  fovRadius: 8
+  attackRadius: 2
+  attackRate: 1

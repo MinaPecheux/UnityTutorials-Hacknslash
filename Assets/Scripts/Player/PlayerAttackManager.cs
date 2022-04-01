@@ -27,7 +27,8 @@ namespace Player
                 hand.position, _data.attackRange, _ENEMY_LAYER);
             foreach (Collider enemy in closeEnemies)
             {
-                Enemy.EnemyManager em = enemy.GetComponent<Enemy.EnemyManager>();
+                Enemy.EnemyManager em =
+                    enemy.transform.parent.GetComponent<Enemy.EnemyManager>();
                 if (em != null)
                     em.TakeHit(_data.attackDamage * (comboStep + 1));
             }
