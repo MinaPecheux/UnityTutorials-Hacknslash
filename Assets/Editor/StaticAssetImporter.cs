@@ -44,8 +44,6 @@ namespace Assets
         void OnPostprocessModel(GameObject g)
         {
             if (!_ShouldProcessModel(this, assetPath)) return;
-            Debug.Log(Path.Combine("Assets", _MATERIALS_FOLDER, "LowPoly.mat"));
-            Debug.Log(_LowPolyMaterial);
             g.GetComponent<Renderer>().material = _LowPolyMaterial;
         }
 
