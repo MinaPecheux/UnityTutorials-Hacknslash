@@ -33,6 +33,7 @@ namespace Player
 
         #region Variables: Animation
         private int _animRunningParamHash;
+        private int _animAttackComboStepParamHash;
         #endregion
 
         private void Awake()
@@ -44,6 +45,7 @@ namespace Player
             _running = false;
             _attacking = false;
             _animRunningParamHash = Animator.StringToHash("Running");
+            _animAttackComboStepParamHash = Animator.StringToHash("AttackComboStep");
 
             _comboHitStep = -1;
             _comboAttackResetCoroutine = null;
@@ -105,15 +107,20 @@ namespace Player
                 if (_comboAttackResetCoroutine != null)
                     StopCoroutine(_comboAttackResetCoroutine);
                 _comboHitStep++;
-                _animator.SetTrigger($"Attack{_comboHitStep}");
+                _animator.SetBool(_animRunningParamHash, false);
+                _animator.SetInteger(
+                    _animAttackComboStepParamHash, _comboHitStep);
                 _comboAttackResetCoroutine = StartCoroutine(
                     Tools.Utils.WaitingForCurrentAnimation(
                         _animator,
                         () =>
                         {
                             _comboHitStep = -1;
+                            _animator.SetInteger(
+                                _animAttackComboStepParamHash, _comboHitStep);
                             _attacking = false;
-                        }));
+                        },
+                        earlyExit: 0.1f));
             }
         }
     }

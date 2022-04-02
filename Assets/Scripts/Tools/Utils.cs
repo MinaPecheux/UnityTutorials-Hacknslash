@@ -10,6 +10,7 @@ namespace Tools
         public static IEnumerator WaitingForCurrentAnimation(
             Animator animator,
             System.Action callback,
+            float earlyExit = 0f,
             string waitForAnimName = null,
             float extraWait = 0f)
         {
@@ -20,7 +21,7 @@ namespace Tools
                     animator.GetAnimatorTransitionInfo(0).duration);
                 yield return new WaitForEndOfFrame();
                 yield return new WaitForSeconds(
-                    animator.GetCurrentAnimatorStateInfo(0).length);
+                    animator.GetCurrentAnimatorStateInfo(0).length - earlyExit);
             }
             else
             {
