@@ -71,8 +71,9 @@ crashlytics-build.properties
 MapCaptures.*
 MapCaptures/
 .DS_Store
-_tmp
-_tmp.meta
 *.png~
 refs/
 ebook/*
+&*/
+&*.*
+&*.meta
