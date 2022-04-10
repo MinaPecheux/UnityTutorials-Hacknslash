@@ -213,6 +213,11 @@ namespace Enemy
                     },
                     waitForAnimName: "TakeHit"));
             }
+
+            float height = _modelCollider.bounds.extents.y / 2f;
+            Vector3 popupPosition = transform.position + transform.up * height;
+            Tools.Graphics.CreateDamagePopup(amount, popupPosition);
+
         }
 
     }
