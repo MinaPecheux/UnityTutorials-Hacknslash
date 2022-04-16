@@ -44,6 +44,8 @@ namespace Inventory
         #region Logic Methods
         public void AddItem(InventoryItemData item, int amount = 1)
         {
+            int idx;
+
             // fill stack of same item type
             Dictionary<int, InventorySlot> currentSlots =
                 new Dictionary<int, InventorySlot>(_inventory);
@@ -66,11 +68,13 @@ namespace Inventory
                             slot.item.maxStackSize,
                             remaining))
                         {
-                            _inventory.Add(_GetNextSlotIndex(), new InventorySlot()
+                            idx = _GetNextSlotIndex();
+                            _inventory.Add(idx, new InventorySlot()
                             {
                                 item = item,
                                 amount = stackCount
                             });
+                            _SetGridItem(idx);
                         }
                     }
                     amount = 0;
