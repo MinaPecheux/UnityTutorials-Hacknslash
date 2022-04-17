@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
@@ -9,6 +10,7 @@ namespace Tools
     public class AddressablesLoader : MonoBehaviour
     {
         public static AddressablesLoader instance;
+        public static UnityEvent addressablesLoaded;
 
         [Header("Graphics")]
         public AssetReferenceGameObject damagePopupPrefab;
@@ -23,6 +25,8 @@ namespace Tools
             if (instance == null)
                 instance = this;
 
+            addressablesLoaded = new UnityEvent();
+
             Addressables.InitializeAsync();
             StartCoroutine(_PreloadReferences());
         }
@@ -33,6 +37,8 @@ namespace Tools
                 = _playerData.LoadAssetAsync<Player.PlayerData>();
             yield return playerDataLoadHandle;
             playerData = playerDataLoadHandle.Result;
+
+            addressablesLoaded.Invoke();
         }
 
         private void OnApplicationQuit()

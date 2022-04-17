@@ -13,6 +13,8 @@ namespace Player
         public float attackRange;
         public float attackDamage;
 
+        public int inventoryMaxWeight = 300;
+
     }
 
 }

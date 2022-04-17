@@ -1,13 +1,14 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Inventory
 {
 
-    public class InventoryManager : MonoBehaviour
+    public class InventoryManager : UI.InGameMenuPanelManager
     {
         class InventorySlot
         {
@@ -15,31 +16,62 @@ namespace Inventory
             public int amount;
         }
 
+        public static UnityEvent<int> itemSelected;
+
         [Header("UI References")]
         [SerializeField] private GameObject _inventoryPanel;
         [SerializeField] private Transform _itemsGrid;
+        [SerializeField] private TextMeshProUGUI _itemDetailsText;
+        [SerializeField] private TextMeshProUGUI _inventoryWeightText;
+        private GameObject _firstItemCell;
 
         private Dictionary<int, InventorySlot> _inventory =
             new Dictionary<int, InventorySlot>();
+        private float _inventoryMaxWeight;
+        private float _inventoryTotalWeight = 0f;
 
         [SerializeField] private InventoryItemData _testItem;
         [SerializeField] private InventoryItemData _testItem2;
         [SerializeField] private InventoryItemData _testItem3;
         [SerializeField] private InventoryItemData _testItem4;
+        [SerializeField] private InventoryItemData _testItem5;
 
         void Start()
         {
+            Tools.AddressablesLoader.addressablesLoaded.AddListener(
+                _OnAddressablesLoaded);
+            itemSelected = new UnityEvent<int>();
+            itemSelected.AddListener(_OnItemSelected);
+
+            _firstItemCell = _itemsGrid.GetChild(0).gameObject;
+
             AddItem(_testItem, 10);
             AddItem(_testItem2, 2);
             AddItem(_testItem3);
             AddItem(_testItem4);
+            AddItem(_testItem5);
         }
 
-        private void Update()
+        public override void OnEntry()
         {
-            if (Keyboard.current.iKey.wasPressedThisFrame)
-                ToggleInventoryPanel();
+            _UpdateGridItems();
+            EventSystem.current.SetSelectedGameObject(_firstItemCell);
+            _firstItemCell.GetComponent<Selectable>().Select();
+            _UpdateItemDetails(0);
         }
+
+        #region Event Callbacks
+        private void _OnAddressablesLoaded()
+        {
+            _inventoryMaxWeight =
+                Tools.AddressablesLoader.instance.playerData.inventoryMaxWeight;
+        }
+
+        private void _OnItemSelected(int slotIndex)
+        {
+            _UpdateItemDetails(slotIndex);
+        }
+        #endregion
 
         #region Logic Methods
         public void AddItem(InventoryItemData item, int amount = 1)
@@ -63,6 +95,7 @@ namespace Inventory
                     {
                         int consumed = slot.item.maxStackSize - slot.amount;
                         slot.amount = slot.item.maxStackSize;
+                        _inventoryTotalWeight += item.weight * consumed;
                         int remaining = amount - consumed;
                         foreach (int stackCount in _DistributeItems(
                             slot.item.maxStackSize,
@@ -74,6 +107,7 @@ namespace Inventory
                                 item = item,
                                 amount = stackCount
                             });
+                            _inventoryTotalWeight += item.weight * slot.amount;
                             _SetGridItem(idx);
                         }
                     }
@@ -88,11 +122,14 @@ namespace Inventory
                                 item.maxStackSize,
                                 amount))
                 {
-                    _inventory.Add(_GetNextSlotIndex(), new InventorySlot()
+                    idx = _GetNextSlotIndex();
+                    _inventory.Add(idx, new InventorySlot()
                     {
                         item = item,
                         amount = stackCount
                     });
+                    _inventoryTotalWeight += item.weight * stackCount;
+                    _SetGridItem(idx);
                 }
             }
         }
@@ -129,13 +166,6 @@ namespace Inventory
         #endregion
 
         #region UI Methods
-        public void ToggleInventoryPanel()
-        {
-            bool on = !_inventoryPanel.activeSelf;
-            if (on) _UpdateGridItems();
-            _inventoryPanel.SetActive(on);
-        }
-
         private void _UpdateGridItems()
         {
             // clean grid
@@ -145,6 +175,9 @@ namespace Inventory
             // show icon + amount in each slot
             foreach (KeyValuePair<int, InventorySlot> p in _inventory)
                 _SetGridItem(p.Key);
+
+            _inventoryWeightText.text =
+                $"{(int)_inventoryTotalWeight}/{_inventoryMaxWeight}";
         }
 
         private void _SetGridItem(int slotIndex)
@@ -169,6 +202,9 @@ namespace Inventory
                     .color = InventoryItemData.ITEM_RARITY_COLORS[slot.item.rarity];
                 slotTransform.Find("Rarity").gameObject.SetActive(true);
             }
+
+            _inventoryWeightText.text =
+                $"{(int)_inventoryTotalWeight}/{_inventoryMaxWeight}";
         }
 
         private void _UnsetGridItem(int slotIndex)
@@ -177,6 +213,22 @@ namespace Inventory
             slotTransform.Find("Icon").gameObject.SetActive(false);
             slotTransform.Find("Rarity").gameObject.SetActive(false);
             slotTransform.Find("Amount").gameObject.SetActive(false);
+
+            _inventoryWeightText.text =
+                $"{(int)_inventoryTotalWeight}/{_inventoryMaxWeight}";
+        }
+
+        private void _UpdateItemDetails(int slotIndex)
+        {
+            if (!_inventory.ContainsKey(slotIndex))
+            {
+                _itemDetailsText.text = "";
+            }
+            else
+            {
+                InventoryItemData item = _inventory[slotIndex].item;
+                _itemDetailsText.text = item.GetDetailsDisplay();
+            }
         }
         #endregion
     }

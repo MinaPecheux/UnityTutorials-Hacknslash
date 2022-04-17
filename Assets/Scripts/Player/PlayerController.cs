@@ -14,7 +14,6 @@ namespace Player
         private Transform _animatorTransform;
 
         #region Variables: Inputs
-        private DefaultInputActions _inputActions;
         private InputAction _moveAction;
         private InputAction _attackAction;
         #endregion
@@ -38,7 +37,6 @@ namespace Player
 
         private void Awake()
         {
-            _inputActions = new DefaultInputActions();
             _controller = GetComponent<CharacterController>();
             _animatorTransform = _animator.transform;
 
@@ -53,10 +51,10 @@ namespace Player
 
         private void OnEnable()
         {
-            _moveAction = _inputActions.Player.Move;
+            _moveAction = Inputs.InputManager.InputActions.Player.Move;
             _moveAction.Enable();
 
-            _attackAction = _inputActions.Player.Attack;
+            _attackAction = Inputs.InputManager.InputActions.Player.Attack;
             _attackAction.performed += _OnAttackAction;
             _attackAction.Enable();
         }

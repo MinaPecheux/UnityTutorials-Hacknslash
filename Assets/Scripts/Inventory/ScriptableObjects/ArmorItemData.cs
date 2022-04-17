@@ -23,6 +23,14 @@ namespace Inventory
 
         public float GetDefence()
             => baseDefence + Random.Range(-defenceVariability, defenceVariability);
+
+        public override string GetDetailsDisplay()
+        {
+            (float minDef, float maxDef) = GetDefenceRange();
+            string output = base.GetDetailsDisplay();
+            output += $"\n\nDefence: {minDef.ToString("0.0")} - {maxDef.ToString("0.0")}";
+            return output;
+        }
     }
 
 }

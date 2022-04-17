@@ -707,6 +707,87 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""InGameMenu"",
+            ""id"": ""3d87ea1d-15d2-44d7-a55c-eca1fa1f3483"",
+            ""actions"": [
+                {
+                    ""name"": ""ToggleMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""39764022-197e-44f4-a03c-3beca7924260"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NavigateMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""f5ec98c3-a753-4e2a-87d7-af0813d1eeb3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""79579428-b067-4b24-ad94-d700f9b97d92"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b4d809c6-21ec-4e59-a415-77bf63711a1b"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Gamepad"",
+                    ""id"": ""0108f742-cff6-4c37-bb3a-9c11f1ba046c"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NavigateMenu"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""b9cf9596-d444-4543-bc35-6b508fd50413"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NavigateMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""f6741f83-c1ac-4bbb-9bbb-93e603475338"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NavigateMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -727,6 +808,10 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        // InGameMenu
+        m_InGameMenu = asset.FindActionMap("InGameMenu", throwIfNotFound: true);
+        m_InGameMenu_ToggleMenu = m_InGameMenu.FindAction("ToggleMenu", throwIfNotFound: true);
+        m_InGameMenu_NavigateMenu = m_InGameMenu.FindAction("NavigateMenu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -928,6 +1013,47 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // InGameMenu
+    private readonly InputActionMap m_InGameMenu;
+    private IInGameMenuActions m_InGameMenuActionsCallbackInterface;
+    private readonly InputAction m_InGameMenu_ToggleMenu;
+    private readonly InputAction m_InGameMenu_NavigateMenu;
+    public struct InGameMenuActions
+    {
+        private @DefaultInputActions m_Wrapper;
+        public InGameMenuActions(@DefaultInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ToggleMenu => m_Wrapper.m_InGameMenu_ToggleMenu;
+        public InputAction @NavigateMenu => m_Wrapper.m_InGameMenu_NavigateMenu;
+        public InputActionMap Get() { return m_Wrapper.m_InGameMenu; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(InGameMenuActions set) { return set.Get(); }
+        public void SetCallbacks(IInGameMenuActions instance)
+        {
+            if (m_Wrapper.m_InGameMenuActionsCallbackInterface != null)
+            {
+                @ToggleMenu.started -= m_Wrapper.m_InGameMenuActionsCallbackInterface.OnToggleMenu;
+                @ToggleMenu.performed -= m_Wrapper.m_InGameMenuActionsCallbackInterface.OnToggleMenu;
+                @ToggleMenu.canceled -= m_Wrapper.m_InGameMenuActionsCallbackInterface.OnToggleMenu;
+                @NavigateMenu.started -= m_Wrapper.m_InGameMenuActionsCallbackInterface.OnNavigateMenu;
+                @NavigateMenu.performed -= m_Wrapper.m_InGameMenuActionsCallbackInterface.OnNavigateMenu;
+                @NavigateMenu.canceled -= m_Wrapper.m_InGameMenuActionsCallbackInterface.OnNavigateMenu;
+            }
+            m_Wrapper.m_InGameMenuActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @ToggleMenu.started += instance.OnToggleMenu;
+                @ToggleMenu.performed += instance.OnToggleMenu;
+                @ToggleMenu.canceled += instance.OnToggleMenu;
+                @NavigateMenu.started += instance.OnNavigateMenu;
+                @NavigateMenu.performed += instance.OnNavigateMenu;
+                @NavigateMenu.canceled += instance.OnNavigateMenu;
+            }
+        }
+    }
+    public InGameMenuActions @InGameMenu => new InGameMenuActions(this);
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -945,5 +1071,10 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
         void OnRightClick(InputAction.CallbackContext context);
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+    }
+    public interface IInGameMenuActions
+    {
+        void OnToggleMenu(InputAction.CallbackContext context);
+        void OnNavigateMenu(InputAction.CallbackContext context);
     }
 }
