@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,8 +8,8 @@ namespace Player
     public class PlayerController : MonoBehaviour
     {
         private CharacterController _controller;
-        [SerializeField] private PlayerData _data;
         [SerializeField] private Animator _animator;
+        private PlayerData _data;
         private Transform _animatorTransform;
 
         #region Variables: Inputs
@@ -21,6 +20,7 @@ namespace Player
         #region Variables: Movement
         private Vector2 _move;
         private bool _running;
+        private bool _hasOverbudernedState;
         #endregion
 
         #region Variables: Attack
@@ -32,6 +32,7 @@ namespace Player
 
         #region Variables: Animation
         private int _animRunningParamHash;
+        private int _animOverburdenedParamHash;
         private int _animAttackComboStepParamHash;
         #endregion
 
@@ -43,10 +44,17 @@ namespace Player
             _running = false;
             _attacking = false;
             _animRunningParamHash = Animator.StringToHash("Running");
+            _animOverburdenedParamHash = Animator.StringToHash("Overburdened");
             _animAttackComboStepParamHash = Animator.StringToHash("AttackComboStep");
 
             _comboHitStep = -1;
             _comboAttackResetCoroutine = null;
+        }
+
+        private void Start()
+        {
+            Tools.AddressablesLoader.addressablesLoaded.AddListener(
+                _OnAddressablesLoaded);
         }
 
         private void OnEnable()
@@ -79,19 +87,34 @@ namespace Player
                     _animator.SetBool(_animRunningParamHash, true);
                 }
 
+                if (_data.overburdened && !_hasOverbudernedState)
+                {
+                    _hasOverbudernedState = true;
+                    _animator.SetBool(_animOverburdenedParamHash, true);
+                }
+                else if (!_data.overburdened && _hasOverbudernedState)
+                {
+                    _hasOverbudernedState = false;
+                    _animator.SetBool(_animOverburdenedParamHash, false);
+                }
+
                 Vector3 v = new Vector3(_move.x, 0f, _move.y);
+                float s = _data.moveSpeed;
+                if (_data.overburdened) s *= 0.33f;
                 _animatorTransform.rotation =
                     Quaternion.LookRotation(-v, Vector3.up);
-                _controller.Move(
-                    v *
-                    Time.deltaTime *
-                    _data.moveSpeed);
+                _controller.Move(v * Time.deltaTime * s);
             }
             else if (_running)
             {
                 _running = false;
                 _animator.SetBool(_animRunningParamHash, false);
             }
+        }
+
+        private void _OnAddressablesLoaded()
+        {
+            _data = Tools.AddressablesLoader.instance.playerData;
         }
 
         private void _OnAttackAction(InputAction.CallbackContext obj)

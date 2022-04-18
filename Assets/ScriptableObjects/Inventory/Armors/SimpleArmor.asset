@@ -18,7 +18,7 @@ MonoBehaviour:
   rarity: 1
   type: 1
   weight: 3
-  price: 8
+  price: 20
   maxStackSize: 1
   baseDefence: 10
   defenceVariability: 2

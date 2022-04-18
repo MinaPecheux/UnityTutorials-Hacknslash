@@ -7,6 +7,7 @@ namespace UI
     public abstract class InGameMenuPanelManager : MonoBehaviour
     {
         public abstract void OnEntry();
+        public abstract void OnExit();
     }
 
     public class InGameMenuManager : MonoBehaviour
@@ -20,6 +21,7 @@ namespace UI
         [SerializeField] private Sprite _tabOffSprite;
 
         #region Base Variables
+        private int _prevPanelIndex;
         private int _currentPanelIndex;
         #endregion
 
@@ -40,6 +42,7 @@ namespace UI
                 }
             }
 
+            _prevPanelIndex = -1;
             _currentPanelIndex = 0;
         }
 
@@ -64,6 +67,12 @@ namespace UI
         {
             bool on = !_menuPanel.activeSelf;
             if (on) _UpdateMenu();
+            else
+            {
+                InGameMenuPanelManager m = _panelManagers[_currentPanelIndex];
+                if (m != null)
+                    m.OnExit();
+            }
             _menuPanel.SetActive(on);
         }
 
@@ -95,9 +104,17 @@ namespace UI
             for (int i = 0; i < _panels.Length; i++)
                 _panels[i].SetActive(i == _currentPanelIndex);
 
+            if (_prevPanelIndex != -1)
+            {
+                InGameMenuPanelManager prevM = _panelManagers[_prevPanelIndex];
+                if (prevM != null)
+                    prevM.OnExit();
+            }
             InGameMenuPanelManager m = _panelManagers[_currentPanelIndex];
             if (m != null)
                 m.OnEntry();
+
+            _prevPanelIndex = _currentPanelIndex;
         }
     }
 

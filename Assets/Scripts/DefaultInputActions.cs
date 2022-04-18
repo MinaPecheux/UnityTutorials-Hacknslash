@@ -729,6 +729,33 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DropItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""378d3dcc-9166-4632-be13-5a907fd5923d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DropItemStack"",
+                    ""type"": ""Button"",
+                    ""id"": ""57ad19e5-d096-4cae-a62a-b94da9346468"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SortInventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""4b235d51-d36d-4136-83d2-249f95abb197"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -786,6 +813,94 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""NavigateMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""85e166b0-7fea-4870-8141-0832509c0459"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DropItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""17b583da-a5fb-4120-ab55-1c7e675bc16e"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DropItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""ShiftX"",
+                    ""id"": ""4fd97d86-9a86-4410-931d-0ac932ece942"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DropItemStack"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""69ac04b0-3b94-4084-b48a-3f5de2c1b3d6"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DropItemStack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""b6a75a88-5247-425f-a9f8-ec566bee2500"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DropItemStack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4ff4b45a-eaf9-419e-be4d-4f76ee970551"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DropItemStack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1867bf1f-3cb3-4487-a0ad-9ec280ed96c6"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SortInventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""329b513d-ab69-40a2-b4c9-e4e909c49990"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SortInventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -812,6 +927,9 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
         m_InGameMenu = asset.FindActionMap("InGameMenu", throwIfNotFound: true);
         m_InGameMenu_ToggleMenu = m_InGameMenu.FindAction("ToggleMenu", throwIfNotFound: true);
         m_InGameMenu_NavigateMenu = m_InGameMenu.FindAction("NavigateMenu", throwIfNotFound: true);
+        m_InGameMenu_DropItem = m_InGameMenu.FindAction("DropItem", throwIfNotFound: true);
+        m_InGameMenu_DropItemStack = m_InGameMenu.FindAction("DropItemStack", throwIfNotFound: true);
+        m_InGameMenu_SortInventory = m_InGameMenu.FindAction("SortInventory", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1019,12 +1137,18 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
     private IInGameMenuActions m_InGameMenuActionsCallbackInterface;
     private readonly InputAction m_InGameMenu_ToggleMenu;
     private readonly InputAction m_InGameMenu_NavigateMenu;
+    private readonly InputAction m_InGameMenu_DropItem;
+    private readonly InputAction m_InGameMenu_DropItemStack;
+    private readonly InputAction m_InGameMenu_SortInventory;
     public struct InGameMenuActions
     {
         private @DefaultInputActions m_Wrapper;
         public InGameMenuActions(@DefaultInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @ToggleMenu => m_Wrapper.m_InGameMenu_ToggleMenu;
         public InputAction @NavigateMenu => m_Wrapper.m_InGameMenu_NavigateMenu;
+        public InputAction @DropItem => m_Wrapper.m_InGameMenu_DropItem;
+        public InputAction @DropItemStack => m_Wrapper.m_InGameMenu_DropItemStack;
+        public InputAction @SortInventory => m_Wrapper.m_InGameMenu_SortInventory;
         public InputActionMap Get() { return m_Wrapper.m_InGameMenu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1040,6 +1164,15 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
                 @NavigateMenu.started -= m_Wrapper.m_InGameMenuActionsCallbackInterface.OnNavigateMenu;
                 @NavigateMenu.performed -= m_Wrapper.m_InGameMenuActionsCallbackInterface.OnNavigateMenu;
                 @NavigateMenu.canceled -= m_Wrapper.m_InGameMenuActionsCallbackInterface.OnNavigateMenu;
+                @DropItem.started -= m_Wrapper.m_InGameMenuActionsCallbackInterface.OnDropItem;
+                @DropItem.performed -= m_Wrapper.m_InGameMenuActionsCallbackInterface.OnDropItem;
+                @DropItem.canceled -= m_Wrapper.m_InGameMenuActionsCallbackInterface.OnDropItem;
+                @DropItemStack.started -= m_Wrapper.m_InGameMenuActionsCallbackInterface.OnDropItemStack;
+                @DropItemStack.performed -= m_Wrapper.m_InGameMenuActionsCallbackInterface.OnDropItemStack;
+                @DropItemStack.canceled -= m_Wrapper.m_InGameMenuActionsCallbackInterface.OnDropItemStack;
+                @SortInventory.started -= m_Wrapper.m_InGameMenuActionsCallbackInterface.OnSortInventory;
+                @SortInventory.performed -= m_Wrapper.m_InGameMenuActionsCallbackInterface.OnSortInventory;
+                @SortInventory.canceled -= m_Wrapper.m_InGameMenuActionsCallbackInterface.OnSortInventory;
             }
             m_Wrapper.m_InGameMenuActionsCallbackInterface = instance;
             if (instance != null)
@@ -1050,6 +1183,15 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
                 @NavigateMenu.started += instance.OnNavigateMenu;
                 @NavigateMenu.performed += instance.OnNavigateMenu;
                 @NavigateMenu.canceled += instance.OnNavigateMenu;
+                @DropItem.started += instance.OnDropItem;
+                @DropItem.performed += instance.OnDropItem;
+                @DropItem.canceled += instance.OnDropItem;
+                @DropItemStack.started += instance.OnDropItemStack;
+                @DropItemStack.performed += instance.OnDropItemStack;
+                @DropItemStack.canceled += instance.OnDropItemStack;
+                @SortInventory.started += instance.OnSortInventory;
+                @SortInventory.performed += instance.OnSortInventory;
+                @SortInventory.canceled += instance.OnSortInventory;
             }
         }
     }
@@ -1076,5 +1218,8 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
     {
         void OnToggleMenu(InputAction.CallbackContext context);
         void OnNavigateMenu(InputAction.CallbackContext context);
+        void OnDropItem(InputAction.CallbackContext context);
+        void OnDropItemStack(InputAction.CallbackContext context);
+        void OnSortInventory(InputAction.CallbackContext context);
     }
 }

@@ -18,7 +18,7 @@ MonoBehaviour:
   rarity: 0
   type: 0
   weight: 8
-  price: 10
+  price: 12
   maxStackSize: 1
   baseDamage: 4
   damageVariability: 2

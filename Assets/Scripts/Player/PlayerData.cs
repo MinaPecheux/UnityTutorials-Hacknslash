@@ -15,6 +15,8 @@ namespace Player
 
         public int inventoryMaxWeight = 300;
 
+        public bool overburdened = false;
+
     }
 
 }

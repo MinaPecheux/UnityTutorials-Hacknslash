@@ -1,8 +1,10 @@
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace Inventory
@@ -21,14 +23,26 @@ namespace Inventory
         [Header("UI References")]
         [SerializeField] private GameObject _inventoryPanel;
         [SerializeField] private Transform _itemsGrid;
+        [SerializeField] private RectTransform _outlineGlow;
         [SerializeField] private TextMeshProUGUI _itemDetailsText;
         [SerializeField] private TextMeshProUGUI _inventoryWeightText;
+
+        #region Base Variables
         private GameObject _firstItemCell;
+        private Player.PlayerData _playerData;
 
         private Dictionary<int, InventorySlot> _inventory =
             new Dictionary<int, InventorySlot>();
+        private int _maxNumberOfSlots;
         private float _inventoryMaxWeight;
         private float _inventoryTotalWeight = 0f;
+        #endregion
+
+        #region Variables: Inputs
+        private InputAction _dropItemAction;
+        private InputAction _dropItemStackAction;
+        private InputAction _sortInventoryAction;
+        #endregion
 
         [SerializeField] private InventoryItemData _testItem;
         [SerializeField] private InventoryItemData _testItem2;
@@ -44,12 +58,11 @@ namespace Inventory
             itemSelected.AddListener(_OnItemSelected);
 
             _firstItemCell = _itemsGrid.GetChild(0).gameObject;
+            _maxNumberOfSlots = _itemsGrid.childCount;
 
-            AddItem(_testItem, 10);
-            AddItem(_testItem2, 2);
-            AddItem(_testItem3);
-            AddItem(_testItem4);
-            AddItem(_testItem5);
+            _dropItemAction = Inputs.InputManager.InputActions.InGameMenu.DropItem;
+            _dropItemStackAction = Inputs.InputManager.InputActions.InGameMenu.DropItemStack;
+            _sortInventoryAction = Inputs.InputManager.InputActions.InGameMenu.SortInventory;
         }
 
         public override void OnEntry()
@@ -57,26 +70,92 @@ namespace Inventory
             _UpdateGridItems();
             EventSystem.current.SetSelectedGameObject(_firstItemCell);
             _firstItemCell.GetComponent<Selectable>().Select();
-            _UpdateItemDetails(0);
+            _OnItemSelected(0);
+
+            _dropItemAction.performed += _OnDropItemAction;
+            _dropItemAction.Enable();
+
+            _dropItemStackAction.performed += _OnDropItemStackAction;
+            _dropItemStackAction.Enable();
+
+            _sortInventoryAction.performed += _OnSortInventoryAction;
+            _sortInventoryAction.Enable();
         }
 
-        #region Event Callbacks
+        public override void OnExit()
+        {
+            _outlineGlow.gameObject.SetActive(false);
+
+            _dropItemAction.performed -= _OnDropItemAction;
+            _dropItemAction.Disable();
+
+            _dropItemStackAction.performed -= _OnDropItemStackAction;
+            _dropItemStackAction.Disable();
+
+            _sortInventoryAction.performed -= _OnSortInventoryAction;
+            _sortInventoryAction.Disable();
+        }
+
+        #region Event/Input Callbacks
         private void _OnAddressablesLoaded()
         {
-            _inventoryMaxWeight =
-                Tools.AddressablesLoader.instance.playerData.inventoryMaxWeight;
+            _playerData = Tools.AddressablesLoader.instance.playerData;
+            _inventoryMaxWeight = _playerData.inventoryMaxWeight;
+
+            AddItem(_testItem, 10);
+            AddItem(_testItem2, 2);
+            AddItem(_testItem5);
         }
 
         private void _OnItemSelected(int slotIndex)
         {
+            _outlineGlow.transform.SetParent(_itemsGrid.GetChild(slotIndex));
+            _outlineGlow.anchoredPosition = Vector2.zero;
+            _outlineGlow.gameObject.SetActive(true);
             _UpdateItemDetails(slotIndex);
+        }
+
+        private void _OnDropItemAction(InputAction.CallbackContext obj)
+        {
+            int selectedSlotIndex = _outlineGlow.parent.GetSiblingIndex();
+            if (!_inventory.ContainsKey(selectedSlotIndex))
+                return;
+
+            RemoveItem(selectedSlotIndex);
+        }
+
+        private void _OnDropItemStackAction(InputAction.CallbackContext obj)
+        {
+            int selectedSlotIndex = _outlineGlow.parent.GetSiblingIndex();
+            if (!_inventory.ContainsKey(selectedSlotIndex))
+                return;
+
+            RemoveItem(selectedSlotIndex, -1);
+        }
+
+        private void _OnSortInventoryAction(InputAction.CallbackContext obj)
+        {
+            List<InventorySlot> sortedSlots = _inventory
+                .Values
+                .OrderBy((InventorySlot s) => -s.item.price * s.amount)
+                .ToList();
+
+            Dictionary<int, InventorySlot> newSlots =
+                new Dictionary<int, InventorySlot>();
+            for (int i = 0; i < sortedSlots.Count; i++)
+                newSlots.Add(i, sortedSlots[i]);
+
+            _inventory = newSlots;
+            _UpdateGridItems();
+            int selectedSlotIndex = _outlineGlow.parent.GetSiblingIndex();
+            _UpdateItemDetails(selectedSlotIndex);
         }
         #endregion
 
         #region Logic Methods
-        public void AddItem(InventoryItemData item, int amount = 1)
+        public int AddItem(InventoryItemData item, int amount = 1)
         {
-            int idx;
+            int excess = 0;
 
             // fill stack of same item type
             Dictionary<int, InventorySlot> currentSlots =
@@ -85,8 +164,6 @@ namespace Inventory
             {
                 InventorySlot slot = p.Value;
 
-                if (slot.amount == slot.item.maxStackSize)
-                    continue;
                 if (slot.item.code == item.code)
                 {
                     if (slot.amount + amount <= slot.item.maxStackSize)
@@ -101,14 +178,7 @@ namespace Inventory
                             slot.item.maxStackSize,
                             remaining))
                         {
-                            idx = _GetNextSlotIndex();
-                            _inventory.Add(idx, new InventorySlot()
-                            {
-                                item = item,
-                                amount = stackCount
-                            });
-                            _inventoryTotalWeight += item.weight * slot.amount;
-                            _SetGridItem(idx);
+                            excess += _AddInventorySlot(item, stackCount);
                         }
                     }
                     amount = 0;
@@ -122,16 +192,62 @@ namespace Inventory
                                 item.maxStackSize,
                                 amount))
                 {
-                    idx = _GetNextSlotIndex();
-                    _inventory.Add(idx, new InventorySlot()
-                    {
-                        item = item,
-                        amount = stackCount
-                    });
-                    _inventoryTotalWeight += item.weight * stackCount;
-                    _SetGridItem(idx);
+                    excess += _AddInventorySlot(item, stackCount);
                 }
             }
+
+            // check for encumbrance
+            _playerData.overburdened = _inventoryTotalWeight > _inventoryMaxWeight;
+            _inventoryWeightText.color = _playerData.overburdened
+                ? Color.red : Color.white;
+
+            return excess;
+        }
+
+        private int _AddInventorySlot(InventoryItemData item, int stackCount)
+        {
+            if (_inventory.Count == _maxNumberOfSlots)
+                return stackCount;
+
+            int idx;
+            idx = _GetNextSlotIndex();
+            _inventory.Add(idx, new InventorySlot()
+            {
+                item = item,
+                amount = stackCount
+            });
+            _inventoryTotalWeight += item.weight * stackCount;
+            _SetGridItem(idx);
+            return 0;
+        }
+
+        public void RemoveItem(int slotIndex, int amount = 1)
+        {
+            bool remove = false;
+            foreach (KeyValuePair<int, InventorySlot> p in _inventory)
+            {
+                if (p.Key == slotIndex)
+                {
+                    InventorySlot slot = p.Value;
+                    if (amount == -1)
+                        amount = slot.amount;
+                    slot.amount -= amount;
+                    if (slot.amount == 0)
+                        remove = true;
+                    _inventoryTotalWeight -= p.Value.item.weight * amount;
+                    break;
+                }
+            }
+            if (remove)
+            {
+                _inventory.Remove(slotIndex);
+                _UnsetGridItem(slotIndex);
+            }
+            else
+            {
+                _SetGridItem(slotIndex);
+            }
+            _UpdateItemDetails(slotIndex);
         }
 
         private int _GetNextSlotIndex()
@@ -194,6 +310,10 @@ namespace Inventory
                     .GetComponent<TextMeshProUGUI>()
                     .text = slot.amount.ToString();
                 slotTransform.Find("Amount").gameObject.SetActive(true);
+            }
+            else
+            {
+                slotTransform.Find("Amount").gameObject.SetActive(false);
             }
             if (slot.item.rarity != ItemRarity.Common)
             {
