@@ -14,4 +14,6 @@ You can find the list of all tutorials [on Medium](https://mina-pecheux.medium.c
 <li>Tutorial #2: <a rel="noopener follow" href="https://mina-pecheux.medium.com/making-a-hackn-slash-2-setting-up-cross-platform-inputs-cd43174c11c9"><strong>Setting up cross-platform inputs</strong></a></li>
   
 <li>Tutorial #3: <a rel="noopener follow" href="https://mina-pecheux.medium.com/making-a-hackn-slash-3-importing-a-3d-model-animating-our-hero-1-2-f23b37f36359"><strong>Importing a 3D model & animating our hero 1/2</strong></a></li>
+  
+<li>Tutorial #4: <a rel="noopener follow" href="https://mina-pecheux.medium.com/making-a-hackn-slash-4-importing-a-3d-model-animating-our-hero-2-2-15377f0a3315"><strong>Importing a 3D model & animating our hero 2/2</strong></a></li>
 </ul>
