@@ -18,4 +18,7 @@ You can find the list of all tutorials [on Medium](https://mina-pecheux.medium.c
 <li>Tutorial #4: <a rel="noopener follow" href="https://mina-pecheux.medium.com/making-a-hackn-slash-4-importing-a-3d-model-animating-our-hero-2-2-15377f0a3315"><strong>Importing a 3D model & animating our hero 2/2</strong></a></li>
   
 <li>Interlude #1: <a rel="noopener follow" href="https://medium.com/codex/hackn-slash-interlude-1-automating-your-unity-imports-cd2ae594bf5c"><strong>Automating your Unity imports</strong></a></li>
+  
+<li>Tutorial #5: <a rel="noopener follow" href="https://mina-pecheux.medium.com/making-a-hackn-slash-5-introducing-combo-attacks-45ce61eb9931"><strong>Introducing combo attacks</strong></a></li>
+  
 </ul>
