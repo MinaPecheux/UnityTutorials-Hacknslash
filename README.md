@@ -21,4 +21,6 @@ You can find the list of all tutorials [on Medium](https://mina-pecheux.medium.c
   
 <li>Tutorial #5: <a rel="noopener follow" href="https://mina-pecheux.medium.com/making-a-hackn-slash-5-introducing-combo-attacks-45ce61eb9931"><strong>Introducing combo attacks</strong></a></li>
   
+<li>Tutorial #6: <a rel="noopener follow" href="https://mina-pecheux.medium.com/making-a-hackn-slash-6-hitting-enemies-733ef33c0b36"><strong>Hitting enemies</strong></a></li>
+  
 </ul>
