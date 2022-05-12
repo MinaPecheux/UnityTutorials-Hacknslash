@@ -23,4 +23,6 @@ You can find the list of all tutorials [on Medium](https://mina-pecheux.medium.c
   
 <li>Tutorial #6: <a rel="noopener follow" href="https://mina-pecheux.medium.com/making-a-hackn-slash-6-hitting-enemies-733ef33c0b36"><strong>Hitting enemies</strong></a></li>
   
+<li>Tutorial #7: <a rel="noopener follow" href="https://mina-pecheux.medium.com/making-a-hackn-slash-7-using-scriptable-objects-and-prefabs-351350514377"><strong>Using Scriptable Objects and Prefabs</strong></a></li>
+  
 </ul>
