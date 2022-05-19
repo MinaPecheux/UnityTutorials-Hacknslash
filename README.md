@@ -25,4 +25,6 @@ You can find the list of all tutorials [on Medium](https://mina-pecheux.medium.c
   
 <li>Tutorial #7: <a rel="noopener follow" href="https://mina-pecheux.medium.com/making-a-hackn-slash-7-using-scriptable-objects-and-prefabs-351350514377"><strong>Using Scriptable Objects and Prefabs</strong></a></li>
   
+<li>Tutorial #8: <a rel="noopener follow" href="https://mina-pecheux.medium.com/making-a-hackn-slash-8-implementing-a-basic-ai-using-a-finite-state-machine-1-2-be45ac71c73b"><strong>Implementing a basic AI using a Finite State Machine 1/2</strong></a></li>
+  
 </ul>
