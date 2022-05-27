@@ -27,6 +27,6 @@ You can find the list of all tutorials [on Medium](https://mina-pecheux.medium.c
   
 <li>Tutorial #8: <a rel="noopener follow" href="https://mina-pecheux.medium.com/making-a-hackn-slash-8-implementing-a-basic-ai-using-a-finite-state-machine-1-2-be45ac71c73b"><strong>Implementing a basic AI using a Finite State Machine 1/2</strong></a></li>
   
-<li>Tutorial #89 <a rel="noopener follow" href="https://mina-pecheux.medium.com/making-a-hackn-slash-9-implementing-a-basic-ai-using-a-finite-state-machine-2-2-a525402dfdb6"><strong>Implementing a basic AI using a Finite State Machine 2/2</strong></a></li>
+<li>Tutorial #9 <a rel="noopener follow" href="https://mina-pecheux.medium.com/making-a-hackn-slash-9-implementing-a-basic-ai-using-a-finite-state-machine-2-2-a525402dfdb6"><strong>Implementing a basic AI using a Finite State Machine 2/2</strong></a></li>
   
 </ul>
