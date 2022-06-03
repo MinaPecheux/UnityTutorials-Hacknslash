@@ -101,6 +101,10 @@ namespace Player
             _attacking = true;
             if (_comboHitStep == _COMBO_MAX_STEP)
                 return;
+            // HACK: avoid the anim getting stuck in Idle
+            // before exiting attack mode
+            if (_comboHitStep == -1 && _attacking)
+                _attacking = false;
             float t = _animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
             if (_comboHitStep == -1 || (t >= 0.1f && t <= 0.8f))
             {
