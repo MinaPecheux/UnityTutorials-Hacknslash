@@ -22,7 +22,7 @@ namespace Tools
                     animator.GetAnimatorTransitionInfo(0).duration);
                 yield return new WaitForEndOfFrame();
                 yield return new WaitUntil(() =>
-                    animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
+                    animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f);
             }
             else if (waitForAnimName == null)
             {
