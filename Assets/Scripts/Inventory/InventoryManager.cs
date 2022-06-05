@@ -18,13 +18,18 @@ namespace Inventory
             public int amount;
         }
 
-        public static UnityEvent<int> itemSelected;
+        public static UnityEvent<(int, Transform)> itemSelected;
         public static UnityEvent<bool> heroPreviewDragUpdated;
+        public static UnityEvent<Transform> lootBagSighted;
+        public static UnityEvent<Transform> lootBagForgotten;
 
         [Header("UI References")]
         [SerializeField] private RectTransform _canvasRectTransform;
         [SerializeField] private RectTransform _grabbedItemDragIcon;
         [SerializeField] private Transform _itemsGrid;
+        [SerializeField] private GameObject _lootPanel;
+        [SerializeField] private Transform _lootSpecialItemsGrid;
+        [SerializeField] private Transform _lootCommonItemsGrid;
         [SerializeField] private RectTransform _outlineGlow;
         [SerializeField] private TextMeshProUGUI _itemDetailsText;
         [SerializeField] private TextMeshProUGUI _inventoryWeightText;
@@ -34,6 +39,10 @@ namespace Inventory
         private Player.PlayerData _playerData;
 
         private Dictionary<int, InventorySlot> _inventory =
+            new Dictionary<int, InventorySlot>();
+        private Dictionary<int, InventorySlot> _lootSpecial =
+            new Dictionary<int, InventorySlot>();
+        private Dictionary<int, InventorySlot> _lootCommon =
             new Dictionary<int, InventorySlot>();
         private int _maxNumberOfSlots;
         private float _inventoryMaxWeight;
@@ -50,9 +59,11 @@ namespace Inventory
         private InputAction _dropItemAction;
         private InputAction _dropItemStackAction;
         private InputAction _sortInventoryAction;
+        private InputAction _lootAction;
         #endregion
 
         private bool _draggingHeroPreview;
+        private List<Transform> _lootBagsInSight = new List<Transform>();
 
         [SerializeField] private InventoryItemData _testItem;
         [SerializeField] private InventoryItemData _testItem2;
@@ -64,11 +75,16 @@ namespace Inventory
         {
             Tools.AddressablesLoader.addressablesLoaded.AddListener(
                 _OnAddressablesLoaded);
-            itemSelected = new UnityEvent<int>();
+            itemSelected = new UnityEvent<(int, Transform)>();
             itemSelected.AddListener(_OnItemSelected);
 
             heroPreviewDragUpdated = new UnityEvent<bool>();
             heroPreviewDragUpdated.AddListener(_OnHeroPreviewDragUpdated);
+
+            lootBagSighted = new UnityEvent<Transform>();
+            lootBagSighted.AddListener(_OnLootBagSighted);
+            lootBagForgotten = new UnityEvent<Transform>();
+            lootBagForgotten.AddListener(_OnLootBagForgotten);
 
             _firstItemCell = _itemsGrid.GetChild(0).gameObject;
             _maxNumberOfSlots = _itemsGrid.childCount;
@@ -77,6 +93,10 @@ namespace Inventory
             _dropItemAction = Inputs.InputManager.InputActions.InGameMenu.DropItem;
             _dropItemStackAction = Inputs.InputManager.InputActions.InGameMenu.DropItemStack;
             _sortInventoryAction = Inputs.InputManager.InputActions.InGameMenu.SortInventory;
+
+            _lootAction = Inputs.InputManager.InputActions.Player.Loot;
+            _lootAction.performed += _OnLootAction;
+            _lootAction.Enable();
         }
 
         private void Update()
@@ -92,12 +112,18 @@ namespace Inventory
             }
         }
 
+        private void OnDisable()
+        {
+            _lootAction.performed -= _OnLootAction;
+            _lootAction.Disable();
+        }
+
         public override void OnEntry()
         {
             _UpdateGridItems();
             EventSystem.current.SetSelectedGameObject(_firstItemCell);
             _firstItemCell.GetComponent<Selectable>().Select();
-            _OnItemSelected(0);
+            _OnItemSelected((0, _itemsGrid));
 
             _toggleItemGrabAction.performed += _OnToggleItemGrabAction;
             _toggleItemGrabAction.Enable();
@@ -140,18 +166,20 @@ namespace Inventory
             AddItem(_testItem5);
         }
 
-        private void _OnItemSelected(int slotIndex)
+        private void _OnItemSelected((int, Transform) data)
         {
+            (int slotIndex, Transform parent) = data;
+
             if (_draggingHeroPreview) return;
             _selectedItemIndex = slotIndex;
-            _outlineGlow.transform.SetParent(_itemsGrid.GetChild(slotIndex));
+            _outlineGlow.transform.SetParent(parent.GetChild(slotIndex));
             _outlineGlow.anchoredPosition = Vector2.zero;
             _outlineGlow.gameObject.SetActive(true);
             _UpdateItemDetails(slotIndex);
 
             if (Inputs.InputManager.UsingController && _grabStartIndex != -1)
             {
-                RectTransform rt = _itemsGrid.GetChild(_selectedItemIndex) as RectTransform;
+                RectTransform rt = parent.GetChild(_selectedItemIndex) as RectTransform;
                 Vector3[] v = new Vector3[4];
                 rt.GetWorldCorners(v);
                 _grabbedItemDragIcon.position = v[3];
@@ -261,9 +289,34 @@ namespace Inventory
             _UpdateItemDetails(selectedSlotIndex);
         }
 
+        private void _OnLootAction(InputAction.CallbackContext obj)
+        {
+            // find closest loot bag
+            Vector3 p = GameObject.FindGameObjectWithTag("Player").transform.position;
+            LootBagManager m = _lootBagsInSight
+                .OrderBy((Transform t) => (p - t.position).sqrMagnitude)
+                .First()
+                .GetComponent<LootBagManager>();
+
+            _SetLoot(m.contents);
+            _lootPanel.SetActive(true);
+        }
+
         private void _OnHeroPreviewDragUpdated(bool on)
         {
             _draggingHeroPreview = on;
+        }
+
+        private void _OnLootBagSighted(Transform bag)
+        {
+            if (!_lootBagsInSight.Contains(bag))
+                _lootBagsInSight.Add(bag);
+        }
+
+        private void _OnLootBagForgotten(Transform bag)
+        {
+            if (_lootBagsInSight.Contains(bag))
+                _lootBagsInSight.Remove(bag);
         }
         #endregion
 
@@ -365,10 +418,45 @@ namespace Inventory
             _UpdateItemDetails(slotIndex);
         }
 
-        private int _GetNextSlotIndex()
+        private void _SetLoot(List<(InventoryItemData, int)> contents)
         {
-            if (_inventory.Count == 0) return 0;
-            List<int> occupiedIndices = new List<int>(_inventory.Keys);
+            // clean loot grids
+            for (int i = 0; i < _lootSpecialItemsGrid.childCount; i++)
+                _UnsetGridItem(i, _lootSpecialItemsGrid);
+            for (int i = 0; i < _lootCommonItemsGrid.childCount; i++)
+                _UnsetGridItem(i, _lootCommonItemsGrid);
+
+            _lootSpecial = new Dictionary<int, InventorySlot>();
+            _lootCommon = new Dictionary<int, InventorySlot>();
+
+            // compute new loot grids
+            int idx; bool itemIsSpecial;
+            foreach ((InventoryItemData item, int amount) in contents)
+            {
+                foreach (int stackCount in _DistributeItems(
+                    item.maxStackSize, amount))
+                {
+                    itemIsSpecial = item.rarity != ItemRarity.Common;
+                    idx = _GetNextSlotIndex(
+                        isLoot: true,
+                        isSpecial: itemIsSpecial);
+                    (itemIsSpecial ? _lootSpecial : _lootCommon)
+                        .Add(idx, new InventorySlot()
+                    {
+                        item = item,
+                        amount = stackCount
+                    });
+                    _SetGridItem(idx, isLoot: true, isSpecial: itemIsSpecial);
+                }
+            }
+        }
+
+        private int _GetNextSlotIndex(bool isLoot = false, bool isSpecial = false)
+        {
+            Dictionary<int, InventorySlot> data = isLoot
+                ? (isSpecial ? _lootSpecial : _lootCommon) : _inventory;
+            if (data.Count == 0) return 0;
+            List<int> occupiedIndices = new List<int>(data.Keys);
             occupiedIndices.Sort();
             for (int i = 1; i < occupiedIndices.Count; i++)
             {
@@ -411,10 +499,17 @@ namespace Inventory
                 $"{(int)_inventoryTotalWeight}/{_inventoryMaxWeight}";
         }
 
-        private void _SetGridItem(int slotIndex)
+        private void _SetGridItem(int slotIndex, bool isLoot = false, bool isSpecial = false)
         {
-            InventorySlot slot = _inventory[slotIndex];
-            Transform slotTransform = _itemsGrid.GetChild(slotIndex);
+            InventorySlot slot = isLoot
+                ? (isSpecial ? _lootSpecial[slotIndex] : _lootCommon[slotIndex])
+                : _inventory[slotIndex];
+
+            Transform slotTransform = isLoot
+                ? (isSpecial
+                    ? _lootSpecialItemsGrid.GetChild(slotIndex)
+                    : _lootCommonItemsGrid.GetChild(slotIndex))
+                : _itemsGrid.GetChild(slotIndex);
             _SetGridItem(slot, slotTransform);
         }
         private void _SetGridItem(InventorySlot slot, Transform slotTransform)
@@ -452,7 +547,11 @@ namespace Inventory
 
         private void _UnsetGridItem(int slotIndex)
         {
-            Transform slotTransform = _itemsGrid.GetChild(slotIndex);
+            _UnsetGridItem(slotIndex, _itemsGrid);
+        }
+        private void _UnsetGridItem(int slotIndex, Transform grid)
+        {
+            Transform slotTransform = grid.GetChild(slotIndex);
             slotTransform.Find("Icon").gameObject.SetActive(false);
             slotTransform.Find("Rarity").gameObject.SetActive(false);
             slotTransform.Find("Amount").gameObject.SetActive(false);

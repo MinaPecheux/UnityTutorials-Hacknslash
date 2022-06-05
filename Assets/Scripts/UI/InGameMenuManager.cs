@@ -20,6 +20,8 @@ namespace UI
         [SerializeField] private Sprite _tabOnSprite;
         [SerializeField] private Sprite _tabOffSprite;
 
+        [SerializeField] private GameObject _equipmentPreviewAnchor;
+
         #region Base Variables
         private int _prevPanelIndex;
         private int _currentPanelIndex;
@@ -44,11 +46,13 @@ namespace UI
 
             _prevPanelIndex = -1;
             _currentPanelIndex = 0;
+
+            _equipmentPreviewAnchor.SetActive(false);
         }
 
         private void OnEnable()
         {
-            _toggleMenuAction = Inputs.InputManager.InputActions.InGameMenu.ToggleMenu;
+            _toggleMenuAction = Inputs.InputManager.InputActions.Transitions.ToggleMenu;
             _toggleMenuAction.performed += _OnToggleMenuAction;
             _toggleMenuAction.Enable();
 
@@ -66,14 +70,30 @@ namespace UI
         private void _OnToggleMenuAction(InputAction.CallbackContext obj)
         {
             bool on = !_menuPanel.activeSelf;
-            if (on) _UpdateMenu();
+            if (on)
+            {
+                _UpdateMenu();
+                Inputs.InputManager.DisableActionMap(
+                    Inputs.InputManager.InputActions.Player);
+                Inputs.InputManager.EnableActionMap(
+                    Inputs.InputManager.InputActions.UI);
+                Inputs.InputManager.EnableActionMap(
+                    Inputs.InputManager.InputActions.InGameMenu);
+            }
             else
             {
                 InGameMenuPanelManager m = _panelManagers[_currentPanelIndex];
                 if (m != null)
                     m.OnExit();
+                Inputs.InputManager.EnableActionMap(
+                    Inputs.InputManager.InputActions.Player);
+                Inputs.InputManager.DisableActionMap(
+                    Inputs.InputManager.InputActions.UI);
+                Inputs.InputManager.DisableActionMap(
+                    Inputs.InputManager.InputActions.InGameMenu);
             }
             _menuPanel.SetActive(on);
+            _equipmentPreviewAnchor.SetActive(on);
         }
 
         private void _OnNavigateMenuAction(InputAction.CallbackContext obj)

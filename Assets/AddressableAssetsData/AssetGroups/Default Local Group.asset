@@ -25,6 +25,10 @@ MonoBehaviour:
     m_Address: Assets/ScriptableObjects/Player.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 8b469b38048d74ed894483402ef0d45e
+    m_Address: Assets/Prefabs/LootBag.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: b62878b69f31f4db5aa8a74d0e88b873, type: 2}
   m_SchemaSet:

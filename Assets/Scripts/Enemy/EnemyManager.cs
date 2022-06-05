@@ -1,5 +1,8 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.AI;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Enemy
 {
@@ -20,6 +23,7 @@ namespace Enemy
         [SerializeField] private EnemyData _data;
         [SerializeField] private Animator _animator;
         [SerializeField] private Collider _modelCollider;
+        [SerializeField] private Inventory.LootGroupData _lootGroup;
         private NavMeshAgent _agent;
 
         #region Variables: General
@@ -189,7 +193,18 @@ namespace Enemy
                     _animator,
                     () =>
                     {
+                        Vector3 pos = transform.position;
                         Destroy(gameObject);
+                        Tools.AddressablesLoader.instance.lootBagPrefab.InstantiateAsync(
+                            pos, Quaternion.identity).Completed +=
+                            (AsyncOperationHandle<GameObject> obj) =>
+                            {
+                                GameObject g = obj.Result;
+                                List<(Inventory.InventoryItemData, int)> contents =
+                                   _lootGroup.PickRandomItems();
+                                g.GetComponent<Inventory.LootBagManager>()
+                                    .contents = contents;
+                            };
                     },
                     waitForAnimName: "Die",
                     extraWait: 1f));

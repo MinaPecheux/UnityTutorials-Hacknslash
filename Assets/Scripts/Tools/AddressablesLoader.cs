@@ -15,6 +15,9 @@ namespace Tools
         [Header("Graphics")]
         public AssetReferenceGameObject damagePopupPrefab;
 
+        [Header("Inventory")]
+        public AssetReferenceGameObject lootBagPrefab;
+
         [Header("Player")]
         [SerializeField] private AssetReference _playerData;
 

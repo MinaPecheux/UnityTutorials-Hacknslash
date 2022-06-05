@@ -19,6 +19,18 @@ namespace Inputs
 
         public static bool UsingController => Gamepad.current != null;
 
+        public static void EnableActionMap(InputActionMap actionMap)
+        {
+            if (!actionMap.enabled)
+                actionMap.Enable();
+        }
+
+        public static void DisableActionMap(InputActionMap actionMap)
+        {
+            if (actionMap.enabled)
+                actionMap.Disable();
+        }
+
     }
 
 }

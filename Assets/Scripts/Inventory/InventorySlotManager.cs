@@ -15,13 +15,13 @@ namespace Inventory
         public void OnPointerEnter(PointerEventData eventData)
         {
             if (!Inputs.InputManager.UsingController)
-                InventoryManager.itemSelected.Invoke(_slotIndex);
+                InventoryManager.itemSelected.Invoke((_slotIndex, transform.parent));
         }
 
         public void OnSelect(BaseEventData eventData)
         {
             if (Inputs.InputManager.UsingController)
-                InventoryManager.itemSelected.Invoke(_slotIndex);
+                InventoryManager.itemSelected.Invoke((_slotIndex, transform.parent));
         }
     }
 
