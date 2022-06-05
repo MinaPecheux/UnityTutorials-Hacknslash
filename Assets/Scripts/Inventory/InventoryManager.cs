@@ -19,9 +19,11 @@ namespace Inventory
         }
 
         public static UnityEvent<int> itemSelected;
+        public static UnityEvent<bool> heroPreviewDragUpdated;
 
         [Header("UI References")]
-        [SerializeField] private GameObject _inventoryPanel;
+        [SerializeField] private RectTransform _canvasRectTransform;
+        [SerializeField] private RectTransform _grabbedItemDragIcon;
         [SerializeField] private Transform _itemsGrid;
         [SerializeField] private RectTransform _outlineGlow;
         [SerializeField] private TextMeshProUGUI _itemDetailsText;
@@ -36,13 +38,21 @@ namespace Inventory
         private int _maxNumberOfSlots;
         private float _inventoryMaxWeight;
         private float _inventoryTotalWeight = 0f;
+        private int _selectedItemIndex = -1;
+        private int _grabStartIndex = -1;
+        private InventorySlot _grabbedItem = null;
+        private bool _grabIsReplacing;
+        private Vector2 _mousePositionToCanvas;
         #endregion
 
         #region Variables: Inputs
+        private InputAction _toggleItemGrabAction;
         private InputAction _dropItemAction;
         private InputAction _dropItemStackAction;
         private InputAction _sortInventoryAction;
         #endregion
+
+        private bool _draggingHeroPreview;
 
         [SerializeField] private InventoryItemData _testItem;
         [SerializeField] private InventoryItemData _testItem2;
@@ -57,12 +67,29 @@ namespace Inventory
             itemSelected = new UnityEvent<int>();
             itemSelected.AddListener(_OnItemSelected);
 
+            heroPreviewDragUpdated = new UnityEvent<bool>();
+            heroPreviewDragUpdated.AddListener(_OnHeroPreviewDragUpdated);
+
             _firstItemCell = _itemsGrid.GetChild(0).gameObject;
             _maxNumberOfSlots = _itemsGrid.childCount;
 
+            _toggleItemGrabAction = Inputs.InputManager.InputActions.InGameMenu.ToggleItemGrab;
             _dropItemAction = Inputs.InputManager.InputActions.InGameMenu.DropItem;
             _dropItemStackAction = Inputs.InputManager.InputActions.InGameMenu.DropItemStack;
             _sortInventoryAction = Inputs.InputManager.InputActions.InGameMenu.SortInventory;
+        }
+
+        private void Update()
+        {
+            if (!Inputs.InputManager.UsingController && _grabStartIndex != -1)
+            {
+                RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                    _canvasRectTransform,
+                    Mouse.current.position.ReadValue(),
+                    null,
+                    out _mousePositionToCanvas);
+                _grabbedItemDragIcon.anchoredPosition = _mousePositionToCanvas;
+            }
         }
 
         public override void OnEntry()
@@ -71,6 +98,9 @@ namespace Inventory
             EventSystem.current.SetSelectedGameObject(_firstItemCell);
             _firstItemCell.GetComponent<Selectable>().Select();
             _OnItemSelected(0);
+
+            _toggleItemGrabAction.performed += _OnToggleItemGrabAction;
+            _toggleItemGrabAction.Enable();
 
             _dropItemAction.performed += _OnDropItemAction;
             _dropItemAction.Enable();
@@ -85,6 +115,9 @@ namespace Inventory
         public override void OnExit()
         {
             _outlineGlow.gameObject.SetActive(false);
+
+            _toggleItemGrabAction.performed -= _OnToggleItemGrabAction;
+            _toggleItemGrabAction.Disable();
 
             _dropItemAction.performed -= _OnDropItemAction;
             _dropItemAction.Disable();
@@ -109,10 +142,87 @@ namespace Inventory
 
         private void _OnItemSelected(int slotIndex)
         {
+            if (_draggingHeroPreview) return;
+            _selectedItemIndex = slotIndex;
             _outlineGlow.transform.SetParent(_itemsGrid.GetChild(slotIndex));
             _outlineGlow.anchoredPosition = Vector2.zero;
             _outlineGlow.gameObject.SetActive(true);
             _UpdateItemDetails(slotIndex);
+
+            if (Inputs.InputManager.UsingController && _grabStartIndex != -1)
+            {
+                RectTransform rt = _itemsGrid.GetChild(_selectedItemIndex) as RectTransform;
+                Vector3[] v = new Vector3[4];
+                rt.GetWorldCorners(v);
+                _grabbedItemDragIcon.position = v[3];
+            }
+        }
+
+        private void _OnToggleItemGrabAction(InputAction.CallbackContext obj)
+        {
+            // grab item
+            if (_grabStartIndex == -1)
+            {
+                // (check slot is not empty)
+                if (!_inventory.ContainsKey(_selectedItemIndex)) return;
+
+                _grabStartIndex = _selectedItemIndex;
+                _grabbedItem = _inventory[_selectedItemIndex];
+                _SetGridItem(_grabbedItem, _grabbedItemDragIcon);
+                _itemsGrid
+                   .GetChild(_grabStartIndex)
+                   .Find("Icon")
+                   .GetComponent<Image>()
+                   .color = new Color(1f, 1f, 1f, 0.5f);
+                if (Inputs.InputManager.UsingController)
+                {
+                    RectTransform rt = _itemsGrid.GetChild(_selectedItemIndex) as RectTransform;
+                    Vector3[] v = new Vector3[4];
+                    rt.GetWorldCorners(v);
+                    _grabbedItemDragIcon.position = v[3];
+                }
+                _grabbedItemDragIcon.gameObject.SetActive(true);
+                _grabIsReplacing = false;
+            }
+            // release item
+            else
+            {
+                InventorySlot prevItemInSlot = null;
+
+                bool droppingToSameSlot = _grabStartIndex == _selectedItemIndex;
+                if (
+                    _inventory.ContainsKey(_selectedItemIndex) &&
+                    !droppingToSameSlot
+                )
+                    prevItemInSlot = _inventory[_selectedItemIndex];
+
+                _inventory[_selectedItemIndex] = _grabbedItem;
+                if (!_grabIsReplacing && !droppingToSameSlot)
+                {
+                    _inventory.Remove(_grabStartIndex);
+                    _UnsetGridItem(_grabStartIndex);
+                }
+                _SetGridItem(_selectedItemIndex);
+                _itemsGrid
+                   .GetChild(_grabStartIndex)
+                   .Find("Icon")
+                   .GetComponent<Image>()
+                   .color = new Color(1f, 1f, 1f, 1f);
+
+                if (prevItemInSlot != null)
+                {
+                    _grabbedItem = prevItemInSlot;
+                    _grabStartIndex = _selectedItemIndex;
+                    _grabIsReplacing = true;
+                    _SetGridItem(_grabbedItem, _grabbedItemDragIcon);
+                }
+                else
+                {
+                    _grabIsReplacing = false;
+                    _grabStartIndex = -1;
+                    _grabbedItemDragIcon.gameObject.SetActive(false);
+                }
+            }
         }
 
         private void _OnDropItemAction(InputAction.CallbackContext obj)
@@ -149,6 +259,11 @@ namespace Inventory
             _UpdateGridItems();
             int selectedSlotIndex = _outlineGlow.parent.GetSiblingIndex();
             _UpdateItemDetails(selectedSlotIndex);
+        }
+
+        private void _OnHeroPreviewDragUpdated(bool on)
+        {
+            _draggingHeroPreview = on;
         }
         #endregion
 
@@ -300,6 +415,10 @@ namespace Inventory
         {
             InventorySlot slot = _inventory[slotIndex];
             Transform slotTransform = _itemsGrid.GetChild(slotIndex);
+            _SetGridItem(slot, slotTransform);
+        }
+        private void _SetGridItem(InventorySlot slot, Transform slotTransform)
+        {
             slotTransform.Find("Icon")
                 .GetComponent<Image>()
                 .sprite = slot.item.icon;
@@ -321,6 +440,10 @@ namespace Inventory
                     .GetComponent<Image>()
                     .color = InventoryItemData.ITEM_RARITY_COLORS[slot.item.rarity];
                 slotTransform.Find("Rarity").gameObject.SetActive(true);
+            }
+            else
+            {
+                slotTransform.Find("Rarity").gameObject.SetActive(false);
             }
 
             _inventoryWeightText.text =

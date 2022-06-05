@@ -713,6 +713,15 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
             ""id"": ""3d87ea1d-15d2-44d7-a55c-eca1fa1f3483"",
             ""actions"": [
                 {
+                    ""name"": ""ToggleItemGrab"",
+                    ""type"": ""Button"",
+                    ""id"": ""8b0c4546-c0d1-4ce9-8679-697fa6f20beb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""ToggleMenu"",
                     ""type"": ""Button"",
                     ""id"": ""39764022-197e-44f4-a03c-3beca7924260"",
@@ -756,6 +765,15 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RotatePreview"",
+                    ""type"": ""Value"",
+                    ""id"": ""bcf9b8a0-efc1-414d-8041-2b5d5217147d"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -901,6 +919,83 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""SortInventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""RightJoystick"",
+                    ""id"": ""ceef249a-dc9f-426d-b22f-879cd02fa245"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotatePreview"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""16fdd537-8c87-46d9-a176-08503a79a4b4"",
+                    ""path"": ""<Gamepad>/rightStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotatePreview"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""35ba06a7-af33-4682-a452-a01ca9223dff"",
+                    ""path"": ""<Gamepad>/rightStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotatePreview"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""c75862ca-a2c7-4ec3-8a36-f50e5b8256ba"",
+                    ""path"": ""<Gamepad>/rightStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotatePreview"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""bbe53ebf-cced-4ad6-8ab2-df2097518821"",
+                    ""path"": ""<Gamepad>/rightStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotatePreview"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3173bff5-3745-444b-b307-06215f4201fd"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleItemGrab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d8501420-5d68-4177-9977-2f3a9acd7dcb"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleItemGrab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -925,11 +1020,13 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
         // InGameMenu
         m_InGameMenu = asset.FindActionMap("InGameMenu", throwIfNotFound: true);
+        m_InGameMenu_ToggleItemGrab = m_InGameMenu.FindAction("ToggleItemGrab", throwIfNotFound: true);
         m_InGameMenu_ToggleMenu = m_InGameMenu.FindAction("ToggleMenu", throwIfNotFound: true);
         m_InGameMenu_NavigateMenu = m_InGameMenu.FindAction("NavigateMenu", throwIfNotFound: true);
         m_InGameMenu_DropItem = m_InGameMenu.FindAction("DropItem", throwIfNotFound: true);
         m_InGameMenu_DropItemStack = m_InGameMenu.FindAction("DropItemStack", throwIfNotFound: true);
         m_InGameMenu_SortInventory = m_InGameMenu.FindAction("SortInventory", throwIfNotFound: true);
+        m_InGameMenu_RotatePreview = m_InGameMenu.FindAction("RotatePreview", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1135,20 +1232,24 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
     // InGameMenu
     private readonly InputActionMap m_InGameMenu;
     private IInGameMenuActions m_InGameMenuActionsCallbackInterface;
+    private readonly InputAction m_InGameMenu_ToggleItemGrab;
     private readonly InputAction m_InGameMenu_ToggleMenu;
     private readonly InputAction m_InGameMenu_NavigateMenu;
     private readonly InputAction m_InGameMenu_DropItem;
     private readonly InputAction m_InGameMenu_DropItemStack;
     private readonly InputAction m_InGameMenu_SortInventory;
+    private readonly InputAction m_InGameMenu_RotatePreview;
     public struct InGameMenuActions
     {
         private @DefaultInputActions m_Wrapper;
         public InGameMenuActions(@DefaultInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ToggleItemGrab => m_Wrapper.m_InGameMenu_ToggleItemGrab;
         public InputAction @ToggleMenu => m_Wrapper.m_InGameMenu_ToggleMenu;
         public InputAction @NavigateMenu => m_Wrapper.m_InGameMenu_NavigateMenu;
         public InputAction @DropItem => m_Wrapper.m_InGameMenu_DropItem;
         public InputAction @DropItemStack => m_Wrapper.m_InGameMenu_DropItemStack;
         public InputAction @SortInventory => m_Wrapper.m_InGameMenu_SortInventory;
+        public InputAction @RotatePreview => m_Wrapper.m_InGameMenu_RotatePreview;
         public InputActionMap Get() { return m_Wrapper.m_InGameMenu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1158,6 +1259,9 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_InGameMenuActionsCallbackInterface != null)
             {
+                @ToggleItemGrab.started -= m_Wrapper.m_InGameMenuActionsCallbackInterface.OnToggleItemGrab;
+                @ToggleItemGrab.performed -= m_Wrapper.m_InGameMenuActionsCallbackInterface.OnToggleItemGrab;
+                @ToggleItemGrab.canceled -= m_Wrapper.m_InGameMenuActionsCallbackInterface.OnToggleItemGrab;
                 @ToggleMenu.started -= m_Wrapper.m_InGameMenuActionsCallbackInterface.OnToggleMenu;
                 @ToggleMenu.performed -= m_Wrapper.m_InGameMenuActionsCallbackInterface.OnToggleMenu;
                 @ToggleMenu.canceled -= m_Wrapper.m_InGameMenuActionsCallbackInterface.OnToggleMenu;
@@ -1173,10 +1277,16 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
                 @SortInventory.started -= m_Wrapper.m_InGameMenuActionsCallbackInterface.OnSortInventory;
                 @SortInventory.performed -= m_Wrapper.m_InGameMenuActionsCallbackInterface.OnSortInventory;
                 @SortInventory.canceled -= m_Wrapper.m_InGameMenuActionsCallbackInterface.OnSortInventory;
+                @RotatePreview.started -= m_Wrapper.m_InGameMenuActionsCallbackInterface.OnRotatePreview;
+                @RotatePreview.performed -= m_Wrapper.m_InGameMenuActionsCallbackInterface.OnRotatePreview;
+                @RotatePreview.canceled -= m_Wrapper.m_InGameMenuActionsCallbackInterface.OnRotatePreview;
             }
             m_Wrapper.m_InGameMenuActionsCallbackInterface = instance;
             if (instance != null)
             {
+                @ToggleItemGrab.started += instance.OnToggleItemGrab;
+                @ToggleItemGrab.performed += instance.OnToggleItemGrab;
+                @ToggleItemGrab.canceled += instance.OnToggleItemGrab;
                 @ToggleMenu.started += instance.OnToggleMenu;
                 @ToggleMenu.performed += instance.OnToggleMenu;
                 @ToggleMenu.canceled += instance.OnToggleMenu;
@@ -1192,6 +1302,9 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
                 @SortInventory.started += instance.OnSortInventory;
                 @SortInventory.performed += instance.OnSortInventory;
                 @SortInventory.canceled += instance.OnSortInventory;
+                @RotatePreview.started += instance.OnRotatePreview;
+                @RotatePreview.performed += instance.OnRotatePreview;
+                @RotatePreview.canceled += instance.OnRotatePreview;
             }
         }
     }
@@ -1216,10 +1329,12 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
     }
     public interface IInGameMenuActions
     {
+        void OnToggleItemGrab(InputAction.CallbackContext context);
         void OnToggleMenu(InputAction.CallbackContext context);
         void OnNavigateMenu(InputAction.CallbackContext context);
         void OnDropItem(InputAction.CallbackContext context);
         void OnDropItemStack(InputAction.CallbackContext context);
         void OnSortInventory(InputAction.CallbackContext context);
+        void OnRotatePreview(InputAction.CallbackContext context);
     }
 }

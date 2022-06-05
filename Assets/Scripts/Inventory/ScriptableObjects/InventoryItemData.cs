@@ -55,7 +55,7 @@ namespace Inventory
             output += $"<size=34>{itemName}</size>";
             output += "</color>\n";
             output += $"<size=24>{type}\n</size>";
-            output += $"<size=24><sprite=0> {price}\t<sprite=1> {weight.ToString("0.0")}</size>";
+            output += $"<size=24><sprite=0> {price}    <sprite=1> {weight.ToString("0.0")}</size>";
             return output;
         }
 
