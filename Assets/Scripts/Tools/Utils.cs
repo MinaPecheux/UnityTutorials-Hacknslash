@@ -12,9 +12,19 @@ namespace Tools
             System.Action callback,
             float earlyExit = 0f,
             string waitForAnimName = null,
-            float extraWait = 0f)
+            float extraWait = 0f,
+            bool stopAfterAnim = false)
         {
-            if (waitForAnimName == null)
+            if (stopAfterAnim)
+            {
+                yield return new WaitForEndOfFrame();
+                yield return new WaitForSeconds(
+                    animator.GetAnimatorTransitionInfo(0).duration);
+                yield return new WaitForEndOfFrame();
+                yield return new WaitUntil(() =>
+                    animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
+            }
+            else if (waitForAnimName == null)
             {
                 yield return new WaitForEndOfFrame();
                 yield return new WaitForSeconds(
