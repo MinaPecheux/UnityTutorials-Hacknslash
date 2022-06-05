@@ -101,10 +101,6 @@ namespace Player
             _attacking = true;
             if (_comboHitStep == _COMBO_MAX_STEP)
                 return;
-            // HACK: avoid the anim getting stuck in Idle
-            // before exiting attack mode
-            if (_comboHitStep == -1 && _attacking)
-                _attacking = false;
             float t = _animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
             if (_comboHitStep == -1 || (t >= 0.1f && t <= 0.8f))
             {
@@ -123,7 +119,12 @@ namespace Player
                             _animator.SetInteger(
                                 _animAttackComboStepParamHash, _comboHitStep);
                             _attacking = false;
+
+                            _move = _moveAction.ReadValue<Vector2>();
+                            if (_move.sqrMagnitude > 0.01f && _running)
+                                _animator.SetBool(_animRunningParamHash, true);
                         },
+                        stopAfterAnim: true,
                         earlyExit: 0.1f));
             }
         }
