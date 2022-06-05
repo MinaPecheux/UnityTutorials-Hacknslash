@@ -38,7 +38,7 @@ namespace Tools
                 yield return new WaitUntil(() =>
                     animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == waitForAnimName);
                 yield return new WaitForSeconds(
-                    animator.GetCurrentAnimatorStateInfo(0).length);
+                    animator.GetCurrentAnimatorStateInfo(0).length - earlyExit);
             }
             if (extraWait > 0)
                 yield return new WaitForSeconds(extraWait);
