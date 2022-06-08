@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UI;
 
 namespace Inventory
@@ -22,6 +23,8 @@ namespace Inventory
         public static UnityEvent<bool> heroPreviewDragUpdated;
         public static UnityEvent<Transform> lootBagSighted;
         public static UnityEvent<Transform> lootBagForgotten;
+
+        public static bool inLootPanel = false;
 
         [Header("UI References")]
         [SerializeField] private RectTransform _canvasRectTransform;
@@ -48,6 +51,7 @@ namespace Inventory
         private float _inventoryMaxWeight;
         private float _inventoryTotalWeight = 0f;
         private int _selectedItemIndex = -1;
+        private Transform _selectedItemParent = null;
         private int _grabStartIndex = -1;
         private InventorySlot _grabbedItem = null;
         private bool _grabIsReplacing;
@@ -60,16 +64,13 @@ namespace Inventory
         private InputAction _dropItemStackAction;
         private InputAction _sortInventoryAction;
         private InputAction _lootAction;
+        private InputAction _lootSingleItemAction;
+        private InputAction _closeLootAction;
         #endregion
 
         private bool _draggingHeroPreview;
+        private LootBagManager _closestLootBag = null;
         private List<Transform> _lootBagsInSight = new List<Transform>();
-
-        [SerializeField] private InventoryItemData _testItem;
-        [SerializeField] private InventoryItemData _testItem2;
-        [SerializeField] private InventoryItemData _testItem3;
-        [SerializeField] private InventoryItemData _testItem4;
-        [SerializeField] private InventoryItemData _testItem5;
 
         void Start()
         {
@@ -97,6 +98,14 @@ namespace Inventory
             _lootAction = Inputs.InputManager.InputActions.Player.Loot;
             _lootAction.performed += _OnLootAction;
             _lootAction.Enable();
+
+            _lootSingleItemAction = Inputs.InputManager.InputActions.Player.LootSingleItem;
+            _lootSingleItemAction.performed += _OnLootSingleItemAction;
+            _lootSingleItemAction.Enable();
+
+            _closeLootAction = Inputs.InputManager.InputActions.Player.CloseLoot;
+            _closeLootAction.performed += _OnCloseLootAction;
+            _closeLootAction.Enable();
         }
 
         private void Update()
@@ -116,6 +125,12 @@ namespace Inventory
         {
             _lootAction.performed -= _OnLootAction;
             _lootAction.Disable();
+
+            _lootSingleItemAction.performed -= _OnLootSingleItemAction;
+            _lootSingleItemAction.Disable();
+
+            _closeLootAction.performed -= _OnCloseLootAction;
+            _closeLootAction.Disable();
         }
 
         public override void OnEntry()
@@ -160,10 +175,6 @@ namespace Inventory
         {
             _playerData = Tools.AddressablesLoader.instance.playerData;
             _inventoryMaxWeight = _playerData.inventoryMaxWeight;
-
-            AddItem(_testItem, 10);
-            AddItem(_testItem2, 2);
-            AddItem(_testItem5);
         }
 
         private void _OnItemSelected((int, Transform) data)
@@ -172,6 +183,7 @@ namespace Inventory
 
             if (_draggingHeroPreview) return;
             _selectedItemIndex = slotIndex;
+            _selectedItemParent = parent;
             _outlineGlow.transform.SetParent(parent.GetChild(slotIndex));
             _outlineGlow.anchoredPosition = Vector2.zero;
             _outlineGlow.gameObject.SetActive(true);
@@ -198,10 +210,10 @@ namespace Inventory
                 _grabbedItem = _inventory[_selectedItemIndex];
                 _SetGridItem(_grabbedItem, _grabbedItemDragIcon);
                 _itemsGrid
-                   .GetChild(_grabStartIndex)
-                   .Find("Icon")
-                   .GetComponent<Image>()
-                   .color = new Color(1f, 1f, 1f, 0.5f);
+                    .GetChild(_grabStartIndex)
+                    .Find("Icon")
+                    .GetComponent<Image>()
+                    .color = new Color(1f, 1f, 1f, 0.5f);
                 if (Inputs.InputManager.UsingController)
                 {
                     RectTransform rt = _itemsGrid.GetChild(_selectedItemIndex) as RectTransform;
@@ -232,10 +244,10 @@ namespace Inventory
                 }
                 _SetGridItem(_selectedItemIndex);
                 _itemsGrid
-                   .GetChild(_grabStartIndex)
-                   .Find("Icon")
-                   .GetComponent<Image>()
-                   .color = new Color(1f, 1f, 1f, 1f);
+                    .GetChild(_grabStartIndex)
+                    .Find("Icon")
+                    .GetComponent<Image>()
+                    .color = new Color(1f, 1f, 1f, 1f);
 
                 if (prevItemInSlot != null)
                 {
@@ -255,20 +267,13 @@ namespace Inventory
 
         private void _OnDropItemAction(InputAction.CallbackContext obj)
         {
-            int selectedSlotIndex = _outlineGlow.parent.GetSiblingIndex();
-            if (!_inventory.ContainsKey(selectedSlotIndex))
-                return;
-
-            RemoveItem(selectedSlotIndex);
+            if (Keyboard.current.shiftKey.isPressed) return;
+            _DropItem(_selectedItemIndex, 1);
         }
 
         private void _OnDropItemStackAction(InputAction.CallbackContext obj)
         {
-            int selectedSlotIndex = _outlineGlow.parent.GetSiblingIndex();
-            if (!_inventory.ContainsKey(selectedSlotIndex))
-                return;
-
-            RemoveItem(selectedSlotIndex, -1);
+            _DropItem(_selectedItemIndex, -1);
         }
 
         private void _OnSortInventoryAction(InputAction.CallbackContext obj)
@@ -293,13 +298,70 @@ namespace Inventory
         {
             // find closest loot bag
             Vector3 p = GameObject.FindGameObjectWithTag("Player").transform.position;
-            LootBagManager m = _lootBagsInSight
+            _closestLootBag = _lootBagsInSight
                 .OrderBy((Transform t) => (p - t.position).sqrMagnitude)
                 .First()
                 .GetComponent<LootBagManager>();
 
-            _SetLoot(m.contents);
+            _SetLoot(_closestLootBag.contents);
             _lootPanel.SetActive(true);
+            inLootPanel = true;
+        }
+
+        private void _OnLootSingleItemAction(InputAction.CallbackContext obj)
+        {
+            if (!inLootPanel)
+                return;
+
+            // (check if inventory is full)
+            if (_inventory.Count == _maxNumberOfSlots)
+                return;
+
+            Dictionary<int, InventorySlot> data =
+                _selectedItemParent == _lootCommonItemsGrid
+                    ? _lootCommon : _lootSpecial;
+            // (check if slot is not empty)
+            if (!data.ContainsKey(_selectedItemIndex))
+                return;
+            InventorySlot slot = data[_selectedItemIndex];
+            int excess = AddItem(slot.item, slot.amount);
+            if (excess <= 0)
+            {
+                _UnsetGridItem(_selectedItemIndex, _selectedItemParent);
+                data.Remove(_selectedItemIndex);
+            }
+            else
+            {
+                data[_selectedItemIndex].amount = excess;
+                _SetGridItem(
+                    _selectedItemIndex,
+                    true,
+                    slot.item.rarity != ItemRarity.Common);
+            }
+
+            if (_lootCommon.Count == 0 && _lootSpecial.Count == 0)
+            {
+                if (_lootBagsInSight.Contains(_closestLootBag.transform))
+                    _lootBagsInSight.Remove(_closestLootBag.transform);
+                Destroy(_closestLootBag.gameObject);
+                _lootPanel.SetActive(false);
+            }
+            else
+            {
+                _closestLootBag.contents =
+                    _lootSpecial.Select((KeyValuePair<int, InventorySlot> p)
+                        => (p.Value.item, p.Value.amount))
+                    .Concat(
+                        _lootCommon.Select((KeyValuePair<int, InventorySlot> p)
+                            => (p.Value.item, p.Value.amount)))
+                    .ToList();
+            }
+        }
+
+        private void _OnCloseLootAction(InputAction.CallbackContext obj)
+        {
+            _lootPanel.SetActive(false);
+            inLootPanel = false;
         }
 
         private void _OnHeroPreviewDragUpdated(bool on)
@@ -418,6 +480,117 @@ namespace Inventory
             _UpdateItemDetails(slotIndex);
         }
 
+        private void _DropItem(int slotIndex, int amount = 1)
+        {
+            if (!_inventory.ContainsKey(slotIndex))
+                return;
+
+            // drop the item as a loot bag
+            Transform p = GameObject.FindGameObjectWithTag("Player").transform;
+            Vector3 pos = p.position - p.GetChild(0).forward; // (just in front of the player)
+            Tools.AddressablesLoader.instance.lootBagPrefab.InstantiateAsync(
+                pos, Quaternion.identity).Completed +=
+                (AsyncOperationHandle<GameObject> obj) =>
+                {
+                    GameObject g = obj.Result;
+                    InventorySlot s = _inventory[slotIndex];
+                    List<(InventoryItemData, int)> contents =
+                        new List<(InventoryItemData, int)>()
+                    {
+                        (s.item, amount == -1 ? s.amount : amount),
+                    };
+                    g.GetComponent<LootBagManager>().contents = contents;
+
+                    // actually remove it from the inventory
+                    RemoveItem(slotIndex, amount);
+                };
+        }
+
+        public void TakeAllLootItems()
+        {
+            int excess;
+            bool inventoryIsFull = _inventory.Count == _maxNumberOfSlots;
+            Dictionary<int, InventorySlot> l =
+                new Dictionary<int, InventorySlot>(_lootCommon);
+            foreach (KeyValuePair<int, InventorySlot> pair in l)
+            {
+                if (inventoryIsFull) break;
+                excess = AddItem(pair.Value.item, pair.Value.amount);
+                inventoryIsFull = excess > 0;
+                if (!inventoryIsFull)
+                {
+                    _UnsetGridItem(pair.Key, _lootCommonItemsGrid);
+                    _lootCommon.Remove(pair.Key);
+                }
+                else
+                {
+                    _lootCommon[pair.Key].amount = excess;
+                    _SetGridItem(pair.Key, true, false);
+                }
+            }
+            TakeSpecialLootItems();
+
+            if (_lootCommon.Count == 0 && _lootSpecial.Count == 0)
+            {
+                if (_lootBagsInSight.Contains(_closestLootBag.transform))
+                    _lootBagsInSight.Remove(_closestLootBag.transform);
+                Destroy(_closestLootBag.gameObject);
+                _lootPanel.SetActive(false);
+            }
+            else
+            {
+                _closestLootBag.contents =
+                    _lootSpecial.Select((KeyValuePair<int, InventorySlot> p)
+                        => (p.Value.item, p.Value.amount))
+                    .Concat(
+                        _lootCommon.Select((KeyValuePair<int, InventorySlot> p)
+                            => (p.Value.item, p.Value.amount)))
+                    .ToList();
+            }
+        }
+
+        public void TakeSpecialLootItems()
+        {
+            int excess;
+            bool inventoryIsFull = _inventory.Count == _maxNumberOfSlots;
+            Dictionary<int, InventorySlot> l =
+                new Dictionary<int, InventorySlot>(_lootSpecial);
+            foreach (KeyValuePair<int, InventorySlot> pair in l)
+            {
+                if (inventoryIsFull) break;
+                excess = AddItem(pair.Value.item, pair.Value.amount);
+                inventoryIsFull = excess > 0;
+                if (!inventoryIsFull)
+                {
+                    _UnsetGridItem(pair.Key, _lootSpecialItemsGrid);
+                    _lootSpecial.Remove(pair.Key);
+                }
+                else
+                {
+                    _lootSpecial[pair.Key].amount = excess;
+                    _SetGridItem(pair.Key, true, true);
+                }
+            }
+
+            if (_lootCommon.Count == 0 && _lootSpecial.Count == 0)
+            {
+                if (_lootBagsInSight.Contains(_closestLootBag.transform))
+                    _lootBagsInSight.Remove(_closestLootBag.transform);
+                Destroy(_closestLootBag.gameObject);
+                _lootPanel.SetActive(false);
+            }
+            else
+            {
+                _closestLootBag.contents =
+                    _lootSpecial.Select((KeyValuePair<int, InventorySlot> p)
+                        => (p.Value.item, p.Value.amount))
+                    .Concat(
+                        _lootCommon.Select((KeyValuePair<int, InventorySlot> p)
+                            => (p.Value.item, p.Value.amount)))
+                    .ToList();
+            }
+        }
+
         private void _SetLoot(List<(InventoryItemData, int)> contents)
         {
             // clean loot grids
@@ -458,6 +631,7 @@ namespace Inventory
             if (data.Count == 0) return 0;
             List<int> occupiedIndices = new List<int>(data.Keys);
             occupiedIndices.Sort();
+            if (!occupiedIndices.Contains(0)) return 0;
             for (int i = 1; i < occupiedIndices.Count; i++)
             {
                 if (occupiedIndices[i] - occupiedIndices[i - 1] > 1)

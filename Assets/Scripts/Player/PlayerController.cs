@@ -119,6 +119,9 @@ namespace Player
 
         private void _OnAttackAction(InputAction.CallbackContext obj)
         {
+            if (Inventory.InventoryManager.inLootPanel)
+                return;
+
             _attacking = true;
             if (_comboHitStep == _COMBO_MAX_STEP)
                 return;

@@ -469,11 +469,6 @@ MonoBehaviour:
   _outlineGlow: {fileID: 90157535}
   _itemDetailsText: {fileID: 525168983}
   _inventoryWeightText: {fileID: 1799893935}
-  _testItem: {fileID: 11400000, guid: 1f255688c97e748b7b61600fc6b0041b, type: 2}
-  _testItem2: {fileID: 11400000, guid: 99498cabc5f1c44f6993682475169410, type: 2}
-  _testItem3: {fileID: 11400000, guid: 891025689cb884ed1827e38dd9ac24f8, type: 2}
-  _testItem4: {fileID: 11400000, guid: c8cd22d1bc75348e0ad62b81f7c4bc8a, type: 2}
-  _testItem5: {fileID: 11400000, guid: bd0981e29bb4a4cbf83283db30a4c601, type: 2}
 --- !u!4 &30142631
 Transform:
   m_ObjectHideFlags: 0
@@ -14389,8 +14384,8 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.9150943, g: 0.9150943, b: 0.9150943, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_NormalColor: {r: 0.8584906, g: 0.8584906, b: 0.8584906, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -14411,7 +14406,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1263760138}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 30142630}
+        m_TargetAssemblyTypeName: Inventory.InventoryManager, Hacknslash
+        m_MethodName: TakeAllLootItems
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1263760138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22529,8 +22536,8 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.9150943, g: 0.9150943, b: 0.9150943, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_NormalColor: {r: 0.8584906, g: 0.8584906, b: 0.8584906, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -22551,7 +22558,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2028859199}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 30142630}
+        m_TargetAssemblyTypeName: Inventory.InventoryManager, Hacknslash
+        m_MethodName: TakeSpecialLootItems
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &2056021273
 PrefabInstance:
   m_ObjectHideFlags: 0

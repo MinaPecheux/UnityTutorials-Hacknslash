@@ -53,6 +53,24 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LootSingleItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""4f8ed300-00c7-4e5f-9ae5-b5e4d67a27e3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CloseLoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""98c336d7-1696-4dc6-8cba-0d13b26ce603"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -218,6 +236,50 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Loot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e2d231aa-3b10-4e66-ac9a-b70a963c598e"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CloseLoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""109c724e-7c91-43a1-8adc-5087e8d7bffb"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CloseLoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cc9a6d7d-3be8-4ed9-b884-f27ed486b3c6"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LootSingleItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2df54334-2a98-4334-b7f9-bdf5229cc9c6"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LootSingleItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1046,6 +1108,8 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Loot = m_Player.FindAction("Loot", throwIfNotFound: true);
+        m_Player_LootSingleItem = m_Player.FindAction("LootSingleItem", throwIfNotFound: true);
+        m_Player_CloseLoot = m_Player.FindAction("CloseLoot", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1131,6 +1195,8 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_Loot;
+    private readonly InputAction m_Player_LootSingleItem;
+    private readonly InputAction m_Player_CloseLoot;
     public struct PlayerActions
     {
         private @DefaultInputActions m_Wrapper;
@@ -1138,6 +1204,8 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @Loot => m_Wrapper.m_Player_Loot;
+        public InputAction @LootSingleItem => m_Wrapper.m_Player_LootSingleItem;
+        public InputAction @CloseLoot => m_Wrapper.m_Player_CloseLoot;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1156,6 +1224,12 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
                 @Loot.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLoot;
                 @Loot.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLoot;
                 @Loot.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLoot;
+                @LootSingleItem.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLootSingleItem;
+                @LootSingleItem.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLootSingleItem;
+                @LootSingleItem.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLootSingleItem;
+                @CloseLoot.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCloseLoot;
+                @CloseLoot.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCloseLoot;
+                @CloseLoot.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCloseLoot;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1169,6 +1243,12 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
                 @Loot.started += instance.OnLoot;
                 @Loot.performed += instance.OnLoot;
                 @Loot.canceled += instance.OnLoot;
+                @LootSingleItem.started += instance.OnLootSingleItem;
+                @LootSingleItem.performed += instance.OnLootSingleItem;
+                @LootSingleItem.canceled += instance.OnLootSingleItem;
+                @CloseLoot.started += instance.OnCloseLoot;
+                @CloseLoot.performed += instance.OnCloseLoot;
+                @CloseLoot.canceled += instance.OnCloseLoot;
             }
         }
     }
@@ -1389,6 +1469,8 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnLoot(InputAction.CallbackContext context);
+        void OnLootSingleItem(InputAction.CallbackContext context);
+        void OnCloseLoot(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
