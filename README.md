@@ -31,4 +31,6 @@ You can find the list of all tutorials [on Medium](https://mina-pecheux.medium.c
   
 <li>Tutorial #10: <a rel="noopener follow" href="https://mina-pecheux.medium.com/making-a-hackn-slash-10-showing-damage-popups-1-2-80f4003abffa"><strong>Showing damage popups 1/2</strong></a></li>
   
+<li>Tutorial #11: <a rel="noopener follow" href="https://mina-pecheux.medium.com/making-a-hackn-slash-11-showing-damage-popups-2-2-e4e6e59ce370"><strong>Showing damage popups 2/2</strong></a></li>
+  
 </ul>
