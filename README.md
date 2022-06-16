@@ -33,4 +33,6 @@ You can find the list of all tutorials [on Medium](https://mina-pecheux.medium.c
   
 <li>Tutorial #11: <a rel="noopener follow" href="https://mina-pecheux.medium.com/making-a-hackn-slash-11-showing-damage-popups-2-2-e4e6e59ce370"><strong>Showing damage popups 2/2</strong></a></li>
   
+<li>Tutorial #12: <a rel="noopener follow" href="https://mina-pecheux.medium.com/making-a-hackn-slash-12-setting-up-an-inventory-panel-317061819206"><strong>Setting up an inventory panel</strong></a></li>
+  
 </ul>
