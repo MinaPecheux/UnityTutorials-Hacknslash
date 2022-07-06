@@ -29,6 +29,430 @@ MonoBehaviour:
     m_Address: Assets/Prefabs/LootBag.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: b84f0d0b4ec00441b93e97357b92acd8
+    m_Address: Assets/InputIcons/Desktop/f.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 628d9a63452ee412480d8260a9728375
+    m_Address: Assets/InputIcons/Desktop/12.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 817a5277b734a443bacb33c3afec67a6
+    m_Address: Assets/InputIcons/Desktop/escape.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0760170d74690466aabf7fbabf3c4faa
+    m_Address: Assets/InputIcons/Desktop/j.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8cb44e67ec8a54e43bbea7665f6570f9
+    m_Address: Assets/InputIcons/Desktop/f4.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d87cd8d4afd2e4ac6abbadd8fc6de139
+    m_Address: Assets/InputIcons/Desktop/f3.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 04fcb4a67e1a54bc68d7ef79eaa3478c
+    m_Address: Assets/InputIcons/Desktop/2.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a3d293e8cc5b142f580f3050ef1ea4aa
+    m_Address: Assets/InputIcons/Desktop/r.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 55d955c62364349bd81504054b656ddf
+    m_Address: Assets/InputIcons/Desktop/c.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: db9cfbb9d8da24c589c48381fe5f20e0
+    m_Address: Assets/InputIcons/Desktop/n.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9ce7a0f0ff47d42fd95b7bb2674ee850
+    m_Address: Assets/InputIcons/Desktop/f9.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 2a0d6f1653c134e829097f5d46a275b1
+    m_Address: Assets/InputIcons/Desktop/ctrl.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 961c8786b8c564a098f41c791b33e73f
+    m_Address: Assets/InputIcons/Desktop/1.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 2cf793123458f41c5886781e1b717a2a
+    m_Address: Assets/InputIcons/Desktop/i.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ee4e501e66a67438aa4c4c5be8a91f25
+    m_Address: Assets/InputIcons/Desktop/f6.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1a288731a70254312a8fd10919424ebd
+    m_Address: Assets/InputIcons/Desktop/enter.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 29d0e273344c748898c86e80fb27b113
+    m_Address: Assets/InputIcons/Desktop/3.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9b092af6217284464b9058090890bb23
+    m_Address: Assets/InputIcons/Desktop/print.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c4dc71b9f277144fb814b9f57038a295
+    m_Address: Assets/InputIcons/Desktop/p.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6be4c38626be14456adb51b2ee4e298e
+    m_Address: Assets/InputIcons/Desktop/z.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0a9f59c38f8e94815b91ac0e5ab38c42
+    m_Address: Assets/InputIcons/Desktop/shift.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 54228de46652f47958e20d4cb82fc1e2
+    m_Address: Assets/InputIcons/Desktop/9.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 272cfc46a00644d4ea8eac3deda90e75
+    m_Address: Assets/InputIcons/Desktop/f7.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1844325a7883b4ff5a88b7c15ba2284d
+    m_Address: Assets/InputIcons/Desktop/rightButton.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9afa0a85db46b47c3abb3d1d7d3bb965
+    m_Address: Assets/InputIcons/Desktop/end.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b324b2a1176624a2a856a2086960db26
+    m_Address: Assets/InputIcons/Desktop/insert.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 13cf7e1f91e514266ad60df75ba48c69
+    m_Address: Assets/InputIcons/Desktop/b.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ac2632bd92d7e4bc6881df06781c4ed1
+    m_Address: Assets/InputIcons/Desktop/backspace.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6bb53d00ab5004db4a09c54cd8c7e3f0
+    m_Address: Assets/InputIcons/Desktop/plus.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 191872a508f764abfbd254a1b92ea2ce
+    m_Address: Assets/InputIcons/Desktop/u.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6162b6d537905431890e29cefa195d36
+    m_Address: Assets/InputIcons/Desktop/minus.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b027ba8ce73504db39e632e7097834d6
+    m_Address: Assets/InputIcons/Desktop/f11.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6807ae8aecfe24492bf498185f1c0b36
+    m_Address: Assets/InputIcons/Desktop/f1.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f47a2633273234301ac42f1065def2e2
+    m_Address: Assets/InputIcons/Desktop/slash.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e0d391343cfdc473b987bafbe404a2d5
+    m_Address: Assets/InputIcons/Desktop/f5.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: fc06f75695cfa4b4687c4feaf9864c3b
+    m_Address: Assets/InputIcons/Desktop/caps.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 261f6f6c3e06d4045a686a81c94dcd2c
+    m_Address: Assets/InputIcons/Desktop/q.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: fb9cd46e1d6aa45dbbeaebd1e1131e42
+    m_Address: Assets/InputIcons/Desktop/f2.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 48f7ba21ef0f8442c8e8e6550480b975
+    m_Address: Assets/InputIcons/Desktop/asterisk.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 64f17385f9cb8440ca8c5efe91d4bb41
+    m_Address: Assets/InputIcons/Desktop/page.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 004d356e11df440458c19e2fe87a1a64
+    m_Address: Assets/InputIcons/Desktop/question.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9fa04a27fe9c542df914f1d906bdba9a
+    m_Address: Assets/InputIcons/Desktop/o.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ba9369686cf6a4cbdb77e7612c059b3a
+    m_Address: Assets/InputIcons/Desktop/w.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a76cbd0b3e3f641c795f091b9e196ef8
+    m_Address: Assets/InputIcons/Desktop/tilda.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a9e1bfb88967e495da52abc55e7d8017
+    m_Address: Assets/InputIcons/Desktop/f12.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0083c2c6c8f46466aaeddf15310173a3
+    m_Address: Assets/InputIcons/Desktop/f10.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c1719640e5fa642288cbcac8f1d00d60
+    m_Address: Assets/InputIcons/Desktop/l.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 898b2f2548fd44edcb3f2a8d7131c4c5
+    m_Address: Assets/InputIcons/Desktop/m.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 454708e7ae6ad4fcabdfbc5a10965d3d
+    m_Address: Assets/InputIcons/Desktop/home.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 2b369d2f70ffb4e3abfc6484fe55509c
+    m_Address: Assets/InputIcons/Desktop/arrow.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1c173e190805a4cb5ab5b5f420e63b1f
+    m_Address: Assets/InputIcons/Desktop/x.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 84b293aaf26ec47fa8d980363729b2cb
+    m_Address: Assets/InputIcons/Desktop/num.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9a7f9d5d471664d639eccb16f651e965
+    m_Address: Assets/InputIcons/Desktop/command.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3e4e9272e40894c8d8305ae3090b7fbc
+    m_Address: Assets/InputIcons/Desktop/semicolon.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3d42eada283ed47229f956e7d2f38900
+    m_Address: Assets/InputIcons/Desktop/6.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0e10aca81974349a59aa21c57e947f58
+    m_Address: Assets/InputIcons/Desktop/v.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 53859eff390a3441691765f0df66e3b1
+    m_Address: Assets/InputIcons/Desktop/5.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 286a49a86c204467397001bb4a4bb805
+    m_Address: Assets/InputIcons/Desktop/d.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e1a9ca2213cdc45beae67a0a683fa272
+    m_Address: Assets/InputIcons/Desktop/del.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 35e0d4459c5ba4f7cba462f78afa9d49
+    m_Address: Assets/InputIcons/Desktop/quote.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 606d7be9e54074adc9d1d33394c2e2f1
+    m_Address: Assets/InputIcons/Desktop/alt.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: abaef961eb76848c0a7228f734ffbebc
+    m_Address: Assets/InputIcons/Desktop/10.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 61f8a344adafb4c1899a60b8d7a662cb
+    m_Address: Assets/InputIcons/Desktop/k.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7231b5717ee9843cab9f907b50154dff
+    m_Address: Assets/InputIcons/Desktop/mark.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 08b6b754308264480830ad5b3d4d975a
+    m_Address: Assets/InputIcons/Desktop/y.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8b264308fcc3e4af0aa55428d80d63d1
+    m_Address: Assets/InputIcons/Desktop/g.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: aa2f7c4ed37a8442492fa7a83248a1f2
+    m_Address: Assets/InputIcons/Desktop/middleButton.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b09cebe08444e48919c27d7200a24f52
+    m_Address: Assets/InputIcons/Desktop/s.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ece125975a1ea4384bd938dca0d9f492
+    m_Address: Assets/InputIcons/Desktop/bracket.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d2184f4ee8a794b2084cc5ae7fd7810b
+    m_Address: Assets/InputIcons/Desktop/4.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 69e5021aef52b4cf89deac0a6b3aab44
+    m_Address: Assets/InputIcons/Desktop/h.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f6951c38af58b44b089af3c44f9a20aa
+    m_Address: Assets/InputIcons/Desktop/t.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: fb7b398a2109e4b7ab1c5d3dad1c62d8
+    m_Address: Assets/InputIcons/Desktop/0.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8c3faab7460ea4b459e615ae76b366ff
+    m_Address: Assets/InputIcons/Desktop/space.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f4c240b2b25e84293abe39b05053607c
+    m_Address: Assets/InputIcons/Desktop/8.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b2647ae4a0e854f4699975b1cbb86672
+    m_Address: Assets/InputIcons/Desktop/leftButton.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a8198384e87b249769211061573840ff
+    m_Address: Assets/InputIcons/Desktop/11.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 29d33977243094a57b9c17c211ea20a8
+    m_Address: Assets/InputIcons/Desktop/e.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a3a152e9910a349af986060c79a1f9cb
+    m_Address: Assets/InputIcons/Desktop/win.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ae6d593b55aa744cb91e45ce7a4dcd8e
+    m_Address: Assets/InputIcons/Desktop/a.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f86f0afd92c52490a84a055333fc1124
+    m_Address: Assets/InputIcons/Desktop/navigate.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 2fc3e4a4cc1864612932060ff5533bc7
+    m_Address: Assets/InputIcons/Desktop/tab.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7367a3e5b4fa34c10a83934aba5c10e7
+    m_Address: Assets/InputIcons/Desktop/f8.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: bdfb4cafd10694049b10795f20f2477f
+    m_Address: Assets/InputIcons/Desktop/7.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7376709e8cf8f479e8b00b984b3924da
+    m_Address: Assets/InputIcons/Xbox/start.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5cc5c332b89b94b2597930c991e6a98e
+    m_Address: Assets/InputIcons/Xbox/leftStick.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f5d04af0147de4879b7cfbcfbf676947
+    m_Address: Assets/InputIcons/Xbox/360_Dpad_Up.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 05663bbe8d7ae4728ad48aa8e07b8885
+    m_Address: Assets/InputIcons/Xbox/buttonNorth.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a23fe13ffec5b4d709a0eee1a9542472
+    m_Address: Assets/InputIcons/Xbox/back.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 78dec1b8f80b74fffa77ad5d2cb9cf26
+    m_Address: Assets/InputIcons/Xbox/rightStick.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ad373fde09db341e996033e2dcedaef4
+    m_Address: Assets/InputIcons/Xbox/360_Dpad_Left.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9b31a63f0b2c249ebb0321f158eae2b4
+    m_Address: Assets/InputIcons/Xbox/dpad.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 739e1d84a99294dcdb7ffad39f06007b
+    m_Address: Assets/InputIcons/Xbox/lt.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8e9972d6897d340e7ac0925fd86653f6
+    m_Address: Assets/InputIcons/Xbox/360_Dpad_Right.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f1e9cb8e190f649fea19e2f511242299
+    m_Address: Assets/InputIcons/Xbox/360_Left_Stick_Click.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ded8877c5845e4b9bbffbe55e9466f30
+    m_Address: Assets/InputIcons/Xbox/lb.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 63650852e827e46078142ea7d315b70a
+    m_Address: Assets/InputIcons/Xbox/back_alt.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 94033ba3a79ec4a31851a087ffb112c0
+    m_Address: Assets/InputIcons/Xbox/buttonEast.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 28db68a6599254cada377dc342019256
+    m_Address: Assets/InputIcons/Xbox/buttonSouth.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ea2dbd314e30b4aeba5b963e9986baf7
+    m_Address: Assets/InputIcons/Xbox/start_alt.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b9f83f48e04ac4f119453a75a3ff1315
+    m_Address: Assets/InputIcons/Xbox/360_Right_Stick_Click.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7699e07339af0440b8e2ef9830882169
+    m_Address: Assets/InputIcons/Xbox/rb.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e85fdca2256e44b7d8c7def044eeeeda
+    m_Address: Assets/InputIcons/Xbox/buttonWest.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3368da3a1e3af4d5a8162b912683a327
+    m_Address: Assets/InputIcons/Xbox/360_Dpad_Down.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5867a7377e3ff4618b3bff6178629117
+    m_Address: Assets/InputIcons/Xbox/rt.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1b322838e7918468cbed318f99e35c7f
+    m_Address: Assets/InputIcons/Xbox/navigate.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: b62878b69f31f4db5aa8a74d0e88b873, type: 2}
   m_SchemaSet:
