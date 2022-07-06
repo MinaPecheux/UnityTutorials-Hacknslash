@@ -151,6 +151,16 @@ namespace Inventory
 
             _sortInventoryAction.performed += _OnSortInventoryAction;
             _sortInventoryAction.Enable();
+
+            UI.InputDisplayers.instance.SetDisplays(new (string, string)[]
+            {
+                ("Close", "Transitions:ToggleMenu"),
+                ("Navigate", "InGameMenu:NavigateMenu"),
+                ("Grab Item", "InGameMenu:ToggleItemGrab"),
+                ("Drop Item", "InGameMenu:DropItem"),
+                ("Drop Stack", "InGameMenu:DropItemStack"),
+                ("Sort", "InGameMenu:SortInventory"),
+            });
         }
 
         public override void OnExit()
@@ -168,6 +178,8 @@ namespace Inventory
 
             _sortInventoryAction.performed -= _OnSortInventoryAction;
             _sortInventoryAction.Disable();
+
+            UI.InputDisplayers.instance.SetDisplays(null);
         }
 
         #region Event/Input Callbacks
@@ -223,6 +235,9 @@ namespace Inventory
                 }
                 _grabbedItemDragIcon.gameObject.SetActive(true);
                 _grabIsReplacing = false;
+
+                UI.InputDisplayers.instance.SetDisplay(
+                    2, "Place Item", "InGameMenu:ToggleItemGrab");
             }
             // release item
             else
@@ -262,6 +277,9 @@ namespace Inventory
                     _grabStartIndex = -1;
                     _grabbedItemDragIcon.gameObject.SetActive(false);
                 }
+
+                UI.InputDisplayers.instance.SetDisplay(
+                    2, "Grab Item", "InGameMenu:ToggleItemGrab");
             }
         }
 
@@ -305,6 +323,12 @@ namespace Inventory
 
             _SetLoot(_closestLootBag.contents);
             _lootPanel.SetActive(true);
+            UI.InputDisplayers.instance.SetDisplays(new (string, string)[]
+            {
+                ("Close", "Player:CloseLoot"),
+                ("Navigate", "UI:Navigate"),
+                ("Loot Single", "Player:LootSingleItem"),
+            });
             inLootPanel = true;
         }
 
@@ -361,6 +385,7 @@ namespace Inventory
         private void _OnCloseLootAction(InputAction.CallbackContext obj)
         {
             _lootPanel.SetActive(false);
+            UI.InputDisplayers.instance.SetDisplays(null);
             inLootPanel = false;
         }
 

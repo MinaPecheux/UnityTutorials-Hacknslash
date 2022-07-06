@@ -48,6 +48,8 @@ namespace UI
             _currentPanelIndex = 0;
 
             _equipmentPreviewAnchor.SetActive(false);
+
+            InputDisplayers.instance.SetDisplays(null);
         }
 
         private void OnEnable()
