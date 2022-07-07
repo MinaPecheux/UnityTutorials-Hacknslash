@@ -30,7 +30,7 @@ namespace Player
                 Enemy.EnemyManager em =
                     enemy.transform.parent.GetComponent<Enemy.EnemyManager>();
                 if (em != null)
-                    em.TakeHit(_data.attackDamage * (comboStep + 1));
+                    em.TakeHit(_data.AttackDamage * (comboStep + 1));
             }
         }
     }

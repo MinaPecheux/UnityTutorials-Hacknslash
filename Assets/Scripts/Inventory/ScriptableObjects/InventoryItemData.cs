@@ -23,10 +23,32 @@ namespace Inventory
         Legendary
     }
 
+    public enum EquipmentSlot
+    {
+        // for armors
+        //   (left column)
+        Helmet,
+        Shoulders,
+        Chest,
+        Legs,
+        Boots,
+        //   (right column)
+        Necklace,
+        Belt,
+        Gloves,
+        Ring1,
+        Ring2,
+        // for weapons
+        LeftHand,
+        RightHand,
+        // for "unequippables"
+        None,
+    }
+
     [CreateAssetMenu(
         fileName = "Item",
         menuName = "Scriptable Objects/Inventory/Item")]
-    public class InventoryItemData : ScriptableObject
+    public abstract class InventoryItemData : ScriptableObject
     {
         public static Dictionary<ItemRarity, Color> ITEM_RARITY_COLORS
             = new Dictionary<ItemRarity, Color>()
@@ -46,6 +68,7 @@ namespace Inventory
         public float weight;
         public int price;
         public int maxStackSize = 20;
+        public EquipmentSlot equipmentSlot = EquipmentSlot.None;
 
         public virtual string GetDetailsDisplay()
         {

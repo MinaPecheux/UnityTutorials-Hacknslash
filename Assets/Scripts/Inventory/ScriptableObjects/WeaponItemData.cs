@@ -17,6 +17,7 @@ namespace Inventory
         {
             type = ItemType.Weapon;
             maxStackSize = 1;
+            equipmentSlot = EquipmentSlot.RightHand;
         }
 
         public (float, float) GetDamageRange()

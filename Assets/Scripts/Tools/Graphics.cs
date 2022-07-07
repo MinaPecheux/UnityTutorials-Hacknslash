@@ -24,7 +24,7 @@ namespace Tools
                 _cameraTransform = Camera.main.transform;
 
             float damageMultiplier =
-                damageAmount / AddressablesLoader.instance.playerData.attackDamage;
+                damageAmount / AddressablesLoader.instance.playerData.AttackDamage;
 
             AddressablesLoader.instance.damagePopupPrefab.InstantiateAsync(
                 worldPosition, Quaternion.identity).Completed +=

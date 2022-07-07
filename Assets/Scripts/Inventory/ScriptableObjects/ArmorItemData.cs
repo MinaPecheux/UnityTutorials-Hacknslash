@@ -16,6 +16,7 @@ namespace Inventory
         {
             type = ItemType.Armor;
             maxStackSize = 1;
+            equipmentSlot = EquipmentSlot.Chest;
         }
 
         public (float, float) GetDefenceRange()

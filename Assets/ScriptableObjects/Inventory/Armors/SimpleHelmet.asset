@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3aaa471e81e3c49968a02d78241eb698, type: 3}
-  m_Name: SimpleArmor
+  m_Name: SimpleHelmet
   m_EditorClassIdentifier: 
-  code: simple_armor
-  itemName: Simple Armor
-  icon: {fileID: 21300000, guid: 2f1eaeeaad36ee5469eff7ff158f37ba, type: 3}
-  rarity: 1
+  code: simple_helmet
+  itemName: Simple Helmet
+  icon: {fileID: 21300000, guid: fd6e4fc32c78509458fc45ea4a478ba8, type: 3}
+  rarity: 0
   type: 1
-  weight: 3
-  price: 20
+  weight: 1
+  price: 15
   maxStackSize: 1
-  equipmentSlot: 2
-  baseDefence: 10
-  defenceVariability: 2
+  equipmentSlot: 0
+  baseDefence: 8
+  defenceVariability: 3

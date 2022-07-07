@@ -20,6 +20,7 @@ MonoBehaviour:
   weight: 8
   price: 12
   maxStackSize: 1
+  equipmentSlot: 11
   baseDamage: 4
   damageVariability: 2
   criticalStrikeChance: 0.02

@@ -858,6 +858,15 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""UseItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""b508ab10-3153-4971-9b58-6fd2aeec1417"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1058,6 +1067,28 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""ToggleItemGrab"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5385ab36-f5fe-4052-b8fe-b91b307327be"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""74d5c2d7-0b39-4ea1-ad45-0fc2266484cc"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -1130,6 +1161,7 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
         m_InGameMenu_DropItemStack = m_InGameMenu.FindAction("DropItemStack", throwIfNotFound: true);
         m_InGameMenu_SortInventory = m_InGameMenu.FindAction("SortInventory", throwIfNotFound: true);
         m_InGameMenu_RotatePreview = m_InGameMenu.FindAction("RotatePreview", throwIfNotFound: true);
+        m_InGameMenu_UseItem = m_InGameMenu.FindAction("UseItem", throwIfNotFound: true);
         // Transitions
         m_Transitions = asset.FindActionMap("Transitions", throwIfNotFound: true);
         m_Transitions_ToggleMenu = m_Transitions.FindAction("ToggleMenu", throwIfNotFound: true);
@@ -1368,6 +1400,7 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_InGameMenu_DropItemStack;
     private readonly InputAction m_InGameMenu_SortInventory;
     private readonly InputAction m_InGameMenu_RotatePreview;
+    private readonly InputAction m_InGameMenu_UseItem;
     public struct InGameMenuActions
     {
         private @DefaultInputActions m_Wrapper;
@@ -1378,6 +1411,7 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
         public InputAction @DropItemStack => m_Wrapper.m_InGameMenu_DropItemStack;
         public InputAction @SortInventory => m_Wrapper.m_InGameMenu_SortInventory;
         public InputAction @RotatePreview => m_Wrapper.m_InGameMenu_RotatePreview;
+        public InputAction @UseItem => m_Wrapper.m_InGameMenu_UseItem;
         public InputActionMap Get() { return m_Wrapper.m_InGameMenu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1405,6 +1439,9 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
                 @RotatePreview.started -= m_Wrapper.m_InGameMenuActionsCallbackInterface.OnRotatePreview;
                 @RotatePreview.performed -= m_Wrapper.m_InGameMenuActionsCallbackInterface.OnRotatePreview;
                 @RotatePreview.canceled -= m_Wrapper.m_InGameMenuActionsCallbackInterface.OnRotatePreview;
+                @UseItem.started -= m_Wrapper.m_InGameMenuActionsCallbackInterface.OnUseItem;
+                @UseItem.performed -= m_Wrapper.m_InGameMenuActionsCallbackInterface.OnUseItem;
+                @UseItem.canceled -= m_Wrapper.m_InGameMenuActionsCallbackInterface.OnUseItem;
             }
             m_Wrapper.m_InGameMenuActionsCallbackInterface = instance;
             if (instance != null)
@@ -1427,6 +1464,9 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
                 @RotatePreview.started += instance.OnRotatePreview;
                 @RotatePreview.performed += instance.OnRotatePreview;
                 @RotatePreview.canceled += instance.OnRotatePreview;
+                @UseItem.started += instance.OnUseItem;
+                @UseItem.performed += instance.OnUseItem;
+                @UseItem.canceled += instance.OnUseItem;
             }
         }
     }
@@ -1493,6 +1533,7 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
         void OnDropItemStack(InputAction.CallbackContext context);
         void OnSortInventory(InputAction.CallbackContext context);
         void OnRotatePreview(InputAction.CallbackContext context);
+        void OnUseItem(InputAction.CallbackContext context);
     }
     public interface ITransitionsActions
     {
