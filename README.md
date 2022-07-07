@@ -39,4 +39,6 @@ You can find the list of all tutorials [on Medium](https://mina-pecheux.medium.c
   
 <li>Tutorial #14: <a rel="noopener follow" href="https://mina-pecheux.medium.com/making-a-hackn-slash-14-creating-an-in-game-menu-adding-item-details-786e37b06e16"><strong>Creating an in-game menu, adding item details...</strong></a></li>
   
+<li>Tutorial #15: <a rel="noopener follow" href="https://mina-pecheux.medium.com/making-a-hackn-slash-15-dropping-items-showing-item-selection-5d5fb9e93c02"><strong>Dropping items, showing item selection…</strong></a></li>
+  
 </ul>
