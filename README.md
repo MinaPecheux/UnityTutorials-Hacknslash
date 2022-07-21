@@ -38,7 +38,11 @@ You can find the list of all tutorials [on Medium](https://mina-pecheux.medium.c
 <li>Tutorial #13: <a rel="noopener follow" href="https://mina-pecheux.medium.com/making-a-hackn-slash-13-creating-items-filling-the-inventory-stacking-43e86c5c43fd"><strong>Creating items, filling the inventory & stacking</strong></a></li>
   
 <li>Tutorial #14: <a rel="noopener follow" href="https://mina-pecheux.medium.com/making-a-hackn-slash-14-creating-an-in-game-menu-adding-item-details-786e37b06e16"><strong>Creating an in-game menu, adding item details...</strong></a></li>
-  
+
 <li>Tutorial #15: <a rel="noopener follow" href="https://mina-pecheux.medium.com/making-a-hackn-slash-15-dropping-items-showing-item-selection-5d5fb9e93c02"><strong>Dropping items, showing item selection…</strong></a></li>
+
+<li>Tutorial #16: <a rel="noopener follow" href="https://medium.com/codex/making-a-hackn-slash-16-on-with-the-inventory-and-the-equipment-systems-7637c4ffafa3"><strong>On with the inventory and the equipment systems!</strong></a></li>
+
+<li>Tutorial #17: <a rel="noopener follow" href="https://mina-pecheux.medium.com/making-a-hackn-slash-17-adding-a-loot-system-1-2-ff8e5184f5a9"><strong>Adding a loot system 1/2</strong></a></li>
   
 </ul>
