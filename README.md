@@ -44,5 +44,7 @@ You can find the list of all tutorials [on Medium](https://mina-pecheux.medium.c
 <li>Tutorial #16: <a rel="noopener follow" href="https://medium.com/codex/making-a-hackn-slash-16-on-with-the-inventory-and-the-equipment-systems-7637c4ffafa3"><strong>On with the inventory and the equipment systems!</strong></a></li>
 
 <li>Tutorial #17: <a rel="noopener follow" href="https://mina-pecheux.medium.com/making-a-hackn-slash-17-adding-a-loot-system-1-2-ff8e5184f5a9"><strong>Adding a loot system 1/2</strong></a></li>
-  
+
+<li>Tutorial #18: <a rel="noopener follow" href="https://mina-pecheux.medium.com/making-a-hackn-slash-18-adding-a-loot-system-2-2-d3a6d4e64c93"><strong>Adding a loot system 2/2</strong></a></li>
+
 </ul>
