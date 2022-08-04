@@ -47,4 +47,6 @@ You can find the list of all tutorials [on Medium](https://mina-pecheux.medium.c
 
 <li>Tutorial #18: <a rel="noopener follow" href="https://mina-pecheux.medium.com/making-a-hackn-slash-18-adding-a-loot-system-2-2-d3a6d4e64c93"><strong>Adding a loot system 2/2</strong></a></li>
 
+<li>Tutorial #19: <a rel="noopener follow" href="https://mina-pecheux.medium.com/making-a-hackn-slash-19-showing-cross-platform-input-displays-68331f690489"><strong>Showing cross-platform input displays</strong></a></li>
+
 </ul>
