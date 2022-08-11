@@ -49,4 +49,6 @@ You can find the list of all tutorials [on Medium](https://mina-pecheux.medium.c
 
 <li>Tutorial #19: <a rel="noopener follow" href="https://mina-pecheux.medium.com/making-a-hackn-slash-19-showing-cross-platform-input-displays-68331f690489"><strong>Showing cross-platform input displays</strong></a></li>
 
+<li>Tutorial #20: <a rel="noopener follow" href="https://mina-pecheux.medium.com/making-a-hackn-slash-20-equipping-our-items-ccd51d9e65f1"><strong>Equipping our items</strong></a></li>
+
 </ul>
