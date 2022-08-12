@@ -21,6 +21,7 @@ MonoBehaviour:
   price: 12
   maxStackSize: 1
   equipmentSlot: 11
+  prefab: {fileID: 8821398751622231426, guid: bbe1e6e47c15c4f0e854eee7518981f0, type: 3}
   baseDamage: 4
   damageVariability: 2
   criticalStrikeChance: 0.02
