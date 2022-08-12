@@ -69,6 +69,7 @@ namespace Inventory
         public int price;
         public int maxStackSize = 20;
         public EquipmentSlot equipmentSlot = EquipmentSlot.None;
+        public GameObject prefab;
 
         public virtual string GetDetailsDisplay()
         {

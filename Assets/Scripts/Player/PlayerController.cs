@@ -3,6 +3,11 @@ using UnityEngine.InputSystem;
 
 namespace Player
 {
+    public enum AnimatorContext
+    {
+        Base = 0,
+        OneHanded,
+    }
 
     [RequireComponent(typeof(CharacterController))]
     public class PlayerController : MonoBehaviour
@@ -34,6 +39,7 @@ namespace Player
         private int _animRunningParamHash;
         private int _animOverburdenedParamHash;
         private int _animAttackComboStepParamHash;
+        private AnimatorContext _currentContext;
         #endregion
 
         private void Awake()
@@ -46,6 +52,7 @@ namespace Player
             _animRunningParamHash = Animator.StringToHash("Running");
             _animOverburdenedParamHash = Animator.StringToHash("Overburdened");
             _animAttackComboStepParamHash = Animator.StringToHash("AttackComboStep");
+            _currentContext = AnimatorContext.Base;
 
             _comboHitStep = -1;
             _comboAttackResetCoroutine = null;
@@ -151,6 +158,14 @@ namespace Player
                         stopAfterAnim: true,
                         earlyExit: 0.1f));
             }
+        }
+
+        public void SetAnimatorContext(AnimatorContext context)
+        {
+            if (_currentContext != AnimatorContext.Base)
+                _animator.SetLayerWeight((int)_currentContext, 0);
+            _animator.SetLayerWeight((int)context, 1);
+            _currentContext = context;
         }
     }
 

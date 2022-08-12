@@ -42,7 +42,9 @@ namespace Inventory
 
         #region Base Variables
         private GameObject _firstItemCell;
+        private GameObject _player;
         private Player.PlayerData _playerData;
+        private Player.PlayerManager _playerManager;
 
         private Dictionary<int, InventorySlot> _inventory =
             new Dictionary<int, InventorySlot>();
@@ -85,6 +87,9 @@ namespace Inventory
 
         void Start()
         {
+            _player = GameObject.FindGameObjectWithTag("Player");
+            _playerManager = _player.GetComponent<Player.PlayerManager>();
+
             Tools.AddressablesLoader.addressablesLoaded.AddListener(
                 _OnAddressablesLoaded);
             itemSelected = new UnityEvent<(int, Transform)>();
@@ -280,6 +285,8 @@ namespace Inventory
                 itemRef = _equipment[es];
                 _equipment.Remove(es);
 
+                _playerManager.Unequip(itemRef);
+
                 fromInventoryToEquipment = false;
             }
 
@@ -380,7 +387,7 @@ namespace Inventory
         private void _OnLootAction(InputAction.CallbackContext obj)
         {
             // find closest loot bag
-            Vector3 p = GameObject.FindGameObjectWithTag("Player").transform.position;
+            Vector3 p = _player.transform.position;
             _closestLootBag = _lootBagsInSight
                 .OrderBy((Transform t) => (p - t.position).sqrMagnitude)
                 .First()
@@ -634,7 +641,7 @@ namespace Inventory
                 return;
 
             // drop the item as a loot bag
-            Transform p = GameObject.FindGameObjectWithTag("Player").transform;
+            Transform p = _player.transform;
             Vector3 pos = p.position - p.GetChild(0).forward; // (just in front of the player)
             Tools.AddressablesLoader.instance.lootBagPrefab.InstantiateAsync(
                 pos, Quaternion.identity).Completed +=
@@ -665,6 +672,7 @@ namespace Inventory
 
             // set the new item
             _equipment[eqSlot] = item;
+            _playerManager.Equip(item);
 
             return prevItem;
         }

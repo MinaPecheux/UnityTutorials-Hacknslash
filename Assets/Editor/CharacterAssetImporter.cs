@@ -27,6 +27,7 @@ namespace Assets
 
             // "Rig" / "Materials" options - depend on the model/anim files
             // - for the model file
+            modelImporter.animationType = ModelImporterAnimationType.Generic;
             if (Path.GetFileName(assetPath).StartsWith("_"))
             {
                 modelImporter.avatarSetup = ModelImporterAvatarSetup.CreateFromThisModel;
