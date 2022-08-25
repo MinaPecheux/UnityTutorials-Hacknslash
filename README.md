@@ -53,4 +53,6 @@ You can find the list of all tutorials [on Medium](https://mina-pecheux.medium.c
 
 <li>Tutorial #21: <a rel="noopener follow" href="https://mina-pecheux.medium.com/making-a-hackn-slash-21-displaying-equipment-and-contextualising-the-animations-368e6741eeb4"><strong>Displaying equipment and contextualising the animations</strong></a></li>
 
+<li>Tutorial #22: <a rel="noopener follow" href="https://mina-pecheux.medium.com/making-a-hackn-slash-22-improving-our-player-statistics-acd29fe1b9a5"><strong>Improving our player statistics</strong></a></li>
+
 </ul>
