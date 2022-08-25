@@ -230,6 +230,7 @@ namespace Inventory
             _outlineGlow.anchoredPosition = Vector2.zero;
             _outlineGlow.gameObject.SetActive(true);
             _UpdateItemDetails(slotIndex);
+            _UpdatePlayerStats(slotIndex);
 
             if (Inputs.InputManager.UsingController && _grabStartIndex != -1)
             {
@@ -286,6 +287,11 @@ namespace Inventory
                 _equipment.Remove(es);
 
                 _playerManager.Unequip(itemRef);
+                _playerData.ApplyStatisticModifiers(itemRef.statisticModifiers, false);
+                if (itemRef.type == ItemType.Weapon)
+                    _playerData.currentAttackRange = _playerData.baseAttackRange;
+                _UpdateItemDetails(_selectedItemIndex);
+                _UpdatePlayerStats();
 
                 fromInventoryToEquipment = false;
             }
@@ -382,6 +388,7 @@ namespace Inventory
             _UpdateGridItems();
             int selectedSlotIndex = _outlineGlow.parent.GetSiblingIndex();
             _UpdateItemDetails(selectedSlotIndex);
+            _UpdatePlayerStats(selectedSlotIndex);
         }
 
         private void _OnLootAction(InputAction.CallbackContext obj)
@@ -609,6 +616,7 @@ namespace Inventory
                 _SetGridItem(slotIndex);
             }
             _UpdateItemDetails(slotIndex);
+            _UpdatePlayerStats(slotIndex);
         }
 
         private void _GrabItem()
@@ -673,6 +681,9 @@ namespace Inventory
             // set the new item
             _equipment[eqSlot] = item;
             _playerManager.Equip(item);
+            _playerData.ApplyStatisticModifiers(item.statisticModifiers, true);
+            if (item.type == ItemType.Weapon)
+                _playerData.currentAttackRange = ((WeaponItemData) item).range;
 
             return prevItem;
         }
@@ -938,7 +949,7 @@ namespace Inventory
                 _inventory.ContainsKey(_selectedItemIndex);
             bool checkEquipment =
                 _selectedItemParent == _equipmentGrid &&
-                _equipment.ContainsKey((EquipmentSlot)(_selectedItemIndex + 1));
+                _equipment.ContainsKey((EquipmentSlot)_selectedItemIndex);
 
             if (!checkInventory && !checkEquipment)
             {
@@ -948,19 +959,50 @@ namespace Inventory
 
             InventoryItemData item = checkInventory
                 ? _inventory[slotIndex].item
-                : _equipment[(EquipmentSlot)(slotIndex + 1)];
+                : _equipment[(EquipmentSlot)slotIndex];
             _itemDetailsText.text = item.GetDetailsDisplay();
         }
 
-        private void _UpdatePlayerStats()
+        private void _UpdatePlayerStats(int slotIndex = -1)
         {
-            string content = $"Strength: {_playerData.strength}\n";
-            content += $"Constitution: {_playerData.constitution}\n";
-            content += $"Dexterity: {_playerData.dexterity}";
+            Player.PlayerStatisticValue[] modifiers = null;
+            if (slotIndex != -1)
+            {
+                bool checkInventory =
+                    _selectedItemParent == _itemsGrid &&
+                    _inventory.ContainsKey(_selectedItemIndex);
+                if (checkInventory)
+                    modifiers = _inventory[slotIndex].item.statisticModifiers;
+            }
+
+            string content = "";
+
+            Player.PlayerStatistic[] statisticsToDisplay = new Player.PlayerStatistic[]
+            {
+                Player.PlayerStatistic.Strength,
+                Player.PlayerStatistic.Constitution,
+                Player.PlayerStatistic.Dexterity,
+            };
+            foreach (Player.PlayerStatistic stat in statisticsToDisplay)
+            {
+                content += $"{stat}: {_playerData.GetStatistic(stat)}";
+                if (modifiers != null)
+                {
+                    int value = Player.PlayerStatisticValue.GetByStat(modifiers, stat);
+                    if (value != 0)
+                    {
+                        if (value > 0)
+                            content += $" <size=18><color=green>(+{value})</color></size>";
+                        if (value < 0)
+                            content += $" <size=18><color=red>({value})</color></size>";
+                    }
+                }
+                content += "\n";
+            }
             _inventoryPlayerStats.text = content;
 
             content = $"Damage: {_playerData.AttackDamage}\n";
-            content += $"Range: {_playerData.attackRange}";
+            content += $"Range: {_playerData.currentAttackRange}";
             _inventoryPlayerAttack.text = content;
         }
         #endregion

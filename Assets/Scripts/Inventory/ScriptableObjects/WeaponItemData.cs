@@ -12,6 +12,7 @@ namespace Inventory
         public float baseDamage;
         public float damageVariability;
         public float criticalStrikeChance;
+        public float range;
 
         public WeaponItemData() : base()
         {

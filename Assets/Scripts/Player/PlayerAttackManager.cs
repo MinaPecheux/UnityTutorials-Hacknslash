@@ -24,7 +24,7 @@ namespace Player
         private void _PlayerHit(int comboStep, Transform hand)
         {
             Collider[] closeEnemies = Physics.OverlapSphere(
-                hand.position, _data.attackRange, _ENEMY_LAYER);
+                hand.position, _data.currentAttackRange, _ENEMY_LAYER);
             foreach (Collider enemy in closeEnemies)
             {
                 Enemy.EnemyManager em =

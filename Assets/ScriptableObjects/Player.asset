@@ -13,5 +13,14 @@ MonoBehaviour:
   m_Name: Player
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  attackRange: 0.5
-  attackDamage: 10
+  baseAttackRange: 0.5
+  currentAttackRange: 10
+  inventoryMaxWeight: 300
+  overburdened: 0
+  statistics:
+  - stat: 0
+    value: 15
+  - stat: 1
+    value: 10
+  - stat: 2
+    value: 12

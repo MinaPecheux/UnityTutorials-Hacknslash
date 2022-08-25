@@ -70,6 +70,7 @@ namespace Inventory
         public int maxStackSize = 20;
         public EquipmentSlot equipmentSlot = EquipmentSlot.None;
         public GameObject prefab;
+        public Player.PlayerStatisticValue[] statisticModifiers;
 
         public virtual string GetDetailsDisplay()
         {
@@ -80,6 +81,23 @@ namespace Inventory
             output += "</color>\n";
             output += $"<size=24>{type}\n</size>";
             output += $"<size=24><sprite=0> {price}    <sprite=1> {weight.ToString("0.0")}</size>";
+            if (statisticModifiers.Length > 0)
+            {
+                output += "\n<size=24>";
+                int i = 0;
+                foreach (Player.PlayerStatisticValue mod in statisticModifiers)
+                {
+                    if (mod.value == 0) continue;
+                    if (mod.value > 0)
+                        output += $"<color=green>+{mod.value} {mod.stat}</color>";
+                    if (mod.value < 0)
+                        output += $"<color=red>{mod.value} {mod.stat}</color>";
+                    if (i < statisticModifiers.Length - 1)
+                        output += "\n";
+                    i++;
+                }
+                output += "</size>";
+            }
             return output;
         }
 

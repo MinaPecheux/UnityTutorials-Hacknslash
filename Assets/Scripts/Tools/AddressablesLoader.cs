@@ -40,6 +40,7 @@ namespace Tools
                 = _playerData.LoadAssetAsync<Player.PlayerData>();
             yield return playerDataLoadHandle;
             playerData = playerDataLoadHandle.Result;
+            playerData.currentAttackRange = playerData.baseAttackRange;
 
             addressablesLoaded.Invoke();
         }

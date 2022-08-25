@@ -21,5 +21,9 @@ MonoBehaviour:
   price: 20
   maxStackSize: 1
   equipmentSlot: 2
+  prefab: {fileID: 0}
+  statisticModifiers:
+  - stat: 1
+    value: 1
   baseDefence: 10
   defenceVariability: 2
