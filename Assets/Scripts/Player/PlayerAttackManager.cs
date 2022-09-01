@@ -30,7 +30,13 @@ namespace Player
                 Enemy.EnemyManager em =
                     enemy.transform.parent.GetComponent<Enemy.EnemyManager>();
                 if (em != null)
-                    em.TakeHit(_data.AttackDamage * (comboStep + 1));
+                {
+                    float dmg = _data.AttackDamage * (comboStep + 1);
+                    float overrideDamage = PlayerController.overrideDamage;
+                    if (overrideDamage != -1f)
+                        dmg = overrideDamage;
+                    em.TakeHit(dmg);
+                }
             }
         }
     }

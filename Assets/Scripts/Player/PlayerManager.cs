@@ -14,9 +14,19 @@ namespace Player
         [SerializeField] private Transform _equipAnchorLeftHand;
         [SerializeField] private Transform _equipAnchorRightHand;
 
+        [SerializeField] private Skills.SkillData[] _skills;
+
         private void Awake()
         {
             _equipmentCache = new Tools.ItemCache();
+        }
+
+        private void OnGUI()
+        {
+            if (GUI.Button(new Rect(10, 10, 200, 100), "Power Strike"))
+            {
+                _skills[0].Cast();
+            }
         }
 
         public void Equip(Inventory.InventoryItemData item)

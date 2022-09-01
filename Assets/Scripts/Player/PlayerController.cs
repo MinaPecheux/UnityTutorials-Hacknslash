@@ -33,6 +33,8 @@ namespace Player
         private int _comboHitStep;
         private Coroutine _comboAttackResetCoroutine;
         private bool _attacking;
+
+        public static float overrideDamage = -1f;
         #endregion
 
         #region Variables: Animation
@@ -146,11 +148,7 @@ namespace Player
                         _animator,
                         () =>
                         {
-                            _comboHitStep = -1;
-                            _animator.SetInteger(
-                                _animAttackComboStepParamHash, _comboHitStep);
-                            _attacking = false;
-
+                            ResetAttackCombo();
                             _move = _moveAction.ReadValue<Vector2>();
                             if (_move.sqrMagnitude > 0.01f && _running)
                                 _animator.SetBool(_animRunningParamHash, true);
@@ -166,6 +164,21 @@ namespace Player
                 _animator.SetLayerWeight((int)_currentContext, 0);
             _animator.SetLayerWeight((int)context, 1);
             _currentContext = context;
+        }
+
+        public void TriggerState(string stateName, System.Action onFinish = null)
+        {
+            _animator.SetTrigger(stateName);
+            if (onFinish != null)
+                StartCoroutine(Tools.Utils.WaitingForCurrentAnimation(_animator, onFinish));
+        }
+
+        public void ResetAttackCombo()
+        {
+            _comboHitStep = -1;
+            _animator.SetInteger(
+                _animAttackComboStepParamHash, _comboHitStep);
+            _attacking = false;
         }
     }
 
