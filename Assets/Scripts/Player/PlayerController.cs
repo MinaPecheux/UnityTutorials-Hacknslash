@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 namespace Player
@@ -16,6 +17,8 @@ namespace Player
         [SerializeField] private Animator _animator;
         private PlayerData _data;
         private Transform _animatorTransform;
+
+        private bool _inUI;
 
         #region Variables: Inputs
         private InputAction _moveAction;
@@ -87,6 +90,8 @@ namespace Player
             if (_attacking)
                 return;
 
+            _inUI = EventSystem.current.IsPointerOverGameObject();
+
             _move = _moveAction.ReadValue<Vector2>();
             if (_move.sqrMagnitude > 0.01f)
             {
@@ -128,6 +133,9 @@ namespace Player
 
         private void _OnAttackAction(InputAction.CallbackContext obj)
         {
+            if (_inUI)
+                return;
+
             if (Inventory.InventoryManager.inLootPanel)
                 return;
 

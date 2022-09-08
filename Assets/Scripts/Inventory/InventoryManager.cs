@@ -112,15 +112,15 @@ namespace Inventory
             _dropItemStackAction = Inputs.InputManager.InputActions.InGameMenu.DropItemStack;
             _sortInventoryAction = Inputs.InputManager.InputActions.InGameMenu.SortInventory;
 
-            _lootAction = Inputs.InputManager.InputActions.Player.Loot;
+            _lootAction = Inputs.InputManager.InputActions.Transitions.Loot;
             _lootAction.performed += _OnLootAction;
             _lootAction.Enable();
 
-            _lootSingleItemAction = Inputs.InputManager.InputActions.Player.LootSingleItem;
+            _lootSingleItemAction = Inputs.InputManager.InputActions.InGameLoot.LootSingleItem;
             _lootSingleItemAction.performed += _OnLootSingleItemAction;
             _lootSingleItemAction.Enable();
 
-            _closeLootAction = Inputs.InputManager.InputActions.Player.CloseLoot;
+            _closeLootAction = Inputs.InputManager.InputActions.InGameLoot.CloseLoot;
             _closeLootAction.performed += _OnCloseLootAction;
             _closeLootAction.Enable();
         }
@@ -402,6 +402,14 @@ namespace Inventory
 
             _SetLoot(_closestLootBag.contents);
             _lootPanel.SetActive(true);
+
+
+            Inputs.InputManager.DisableActionMap(
+                Inputs.InputManager.InputActions.Player);
+            Inputs.InputManager.EnableActionMap(
+                Inputs.InputManager.InputActions.UI);
+            Inputs.InputManager.EnableActionMap(
+                Inputs.InputManager.InputActions.InGameLoot);
             UI.InputDisplayers.instance.SetDisplays(new (string, string)[]
             {
                 ("Close", "Player:CloseLoot"),
@@ -413,9 +421,6 @@ namespace Inventory
 
         private void _OnLootSingleItemAction(InputAction.CallbackContext obj)
         {
-            if (!inLootPanel)
-                return;
-
             // (check if inventory is full)
             if (_inventory.Count == _maxNumberOfSlots)
                 return;
@@ -464,6 +469,13 @@ namespace Inventory
         private void _OnCloseLootAction(InputAction.CallbackContext obj)
         {
             _lootPanel.SetActive(false);
+
+            Inputs.InputManager.EnableActionMap(
+                Inputs.InputManager.InputActions.Player);
+            Inputs.InputManager.DisableActionMap(
+                Inputs.InputManager.InputActions.UI);
+            Inputs.InputManager.DisableActionMap(
+                Inputs.InputManager.InputActions.InGameLoot);
             UI.InputDisplayers.instance.SetDisplays(null);
             inLootPanel = false;
         }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Skills
 {
-    public delegate void SkillEffect();
+    public delegate void SkillEffect(SkillData skill);
 
     public static class SkillEffects
     {
@@ -13,18 +13,20 @@ namespace Skills
                 { SkillCode.PowerStrike, PowerStrike },
             };
 
-        public static void PowerStrike()
+        public static void PowerStrike(SkillData skill)
         {
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             Player.PlayerController pc = player.GetComponent<Player.PlayerController>();
             pc.TriggerState("PowerStrike", () =>
             {
-                Player.PlayerController.overrideDamage = -1f;
+                Player.PlayerController.overrideDamage = -1;
             });
-
+            
             pc.ResetAttackCombo();
 
-            Player.PlayerController.overrideDamage = 10000f;
+            if (skill.fxPrefab != null)
+                GameObject.Instantiate(skill.fxPrefab, player.transform);
+            Player.PlayerController.overrideDamage = skill.damage;
         }
 
     }

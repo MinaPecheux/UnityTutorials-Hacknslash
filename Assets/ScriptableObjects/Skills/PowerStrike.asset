@@ -15,4 +15,7 @@ MonoBehaviour:
   code: 0
   displayName: Power Strike
   type: 0
+  cooldown: 3
+  damage: 10000
   icon: {fileID: 21300000, guid: aeb31def086466745b570d082197ee1f, type: 3}
+  fxPrefab: {fileID: 100000, guid: f06e78284f831ae469c74624ab5d513b, type: 3}

@@ -46,27 +46,54 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Loot"",
+                    ""name"": ""CastSkill1"",
                     ""type"": ""Button"",
-                    ""id"": ""e3958dd8-9a74-4546-b69e-4ea959f5cc51"",
+                    ""id"": ""a7d34436-7ad0-4cd4-9a1e-7d2cd7f05229"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""LootSingleItem"",
+                    ""name"": ""CastSkill2"",
                     ""type"": ""Button"",
-                    ""id"": ""4f8ed300-00c7-4e5f-9ae5-b5e4d67a27e3"",
+                    ""id"": ""18b3120e-5d6c-4208-b53f-46b89409c9e6"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""CloseLoot"",
+                    ""name"": ""CastSkill3"",
                     ""type"": ""Button"",
-                    ""id"": ""98c336d7-1696-4dc6-8cba-0d13b26ce603"",
+                    ""id"": ""07584a95-9c8f-487a-9f6d-050305e61132"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CastSkill4"",
+                    ""type"": ""Button"",
+                    ""id"": ""f2de5add-3f4f-4d30-bebf-61d67bc0bf25"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CastSkill5"",
+                    ""type"": ""Button"",
+                    ""id"": ""329dc8f1-8c97-4b5c-8112-de20bb26b742"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CastSkill6"",
+                    ""type"": ""Button"",
+                    ""id"": ""f10390f0-5881-40e1-8bee-23f4a32e2e37"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -219,29 +246,165 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""43b2398a-884b-4935-9dcb-474e441bfd8b"",
+                    ""id"": ""de3a00ee-867a-40ab-bbd2-6b8a64ec0ef1"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CastSkill1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f116a1a1-96b3-4ff2-8a00-ef332aab0a51"",
                     ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Loot"",
+                    ""action"": ""CastSkill1"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""ef2435a0-dd03-4a0d-a6cc-769cd2b0b8ee"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""id"": ""38d63e26-9bf3-4c6d-83cc-28213f7ebca3"",
+                    ""path"": ""<Keyboard>/3"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Loot"",
+                    ""action"": ""CastSkill3"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""e2d231aa-3b10-4e66-ac9a-b70a963c598e"",
+                    ""id"": ""ecee8476-d015-4049-9180-03f2bcb588f5"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CastSkill3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""875608fd-aa78-4599-b62c-472d633ebc07"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CastSkill2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""81b6abb4-1750-4545-a347-e182e42f100b"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CastSkill2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""032ceb29-c6a4-4738-8bb8-8762728344c1"",
+                    ""path"": ""<Keyboard>/6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CastSkill6"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b373c274-ccea-49cf-96be-7943e4a9c20a"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CastSkill6"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5554b7c7-6578-4fab-bc68-9c6ac1505967"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CastSkill5"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0004b3c0-442f-4541-81fb-1c26ae7348d4"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CastSkill5"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""319eacec-261c-4ae5-819f-8dde450bfb72"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CastSkill4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9bc254c5-1f6a-46f6-a171-a0521f74d35e"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CastSkill4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""InGameLoot"",
+            ""id"": ""bf44d5ab-c335-4c56-b6e6-03f8f9a5bfd6"",
+            ""actions"": [
+                {
+                    ""name"": ""LootSingleItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""0c111682-25f6-480f-b137-970ad85b9e93"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CloseLoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""57d4651f-cda7-4dcd-ba71-e9143f88e0cf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""85a393a2-148c-48ca-b3e4-4d18ad6ec011"",
                     ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -252,7 +415,7 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""109c724e-7c91-43a1-8adc-5087e8d7bffb"",
+                    ""id"": ""bf6a6755-875b-4654-bb49-a9e3b89e94db"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -263,7 +426,7 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""cc9a6d7d-3be8-4ed9-b884-f27ed486b3c6"",
+                    ""id"": ""840d6787-7aae-4dc8-b602-fb98d0af4500"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -274,7 +437,7 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""2df54334-2a98-4334-b7f9-bdf5229cc9c6"",
+                    ""id"": ""95dfdd45-1bb7-4cdd-8748-055188a1cdf0"",
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -1104,6 +1267,15 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Loot"",
+                    ""type"": ""Button"",
+                    ""id"": ""09f04738-b5f8-4a1f-a16f-4bdf551218d5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1128,6 +1300,28 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""ToggleMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6415d2c1-1160-40fc-88a9-dedcb96aa6a0"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Loot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5e334c68-ecf9-4637-b99f-8ed890de4df7"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Loot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1138,9 +1332,16 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
-        m_Player_Loot = m_Player.FindAction("Loot", throwIfNotFound: true);
-        m_Player_LootSingleItem = m_Player.FindAction("LootSingleItem", throwIfNotFound: true);
-        m_Player_CloseLoot = m_Player.FindAction("CloseLoot", throwIfNotFound: true);
+        m_Player_CastSkill1 = m_Player.FindAction("CastSkill1", throwIfNotFound: true);
+        m_Player_CastSkill2 = m_Player.FindAction("CastSkill2", throwIfNotFound: true);
+        m_Player_CastSkill3 = m_Player.FindAction("CastSkill3", throwIfNotFound: true);
+        m_Player_CastSkill4 = m_Player.FindAction("CastSkill4", throwIfNotFound: true);
+        m_Player_CastSkill5 = m_Player.FindAction("CastSkill5", throwIfNotFound: true);
+        m_Player_CastSkill6 = m_Player.FindAction("CastSkill6", throwIfNotFound: true);
+        // InGameLoot
+        m_InGameLoot = asset.FindActionMap("InGameLoot", throwIfNotFound: true);
+        m_InGameLoot_LootSingleItem = m_InGameLoot.FindAction("LootSingleItem", throwIfNotFound: true);
+        m_InGameLoot_CloseLoot = m_InGameLoot.FindAction("CloseLoot", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1165,6 +1366,7 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
         // Transitions
         m_Transitions = asset.FindActionMap("Transitions", throwIfNotFound: true);
         m_Transitions_ToggleMenu = m_Transitions.FindAction("ToggleMenu", throwIfNotFound: true);
+        m_Transitions_Loot = m_Transitions.FindAction("Loot", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1226,18 +1428,24 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Attack;
-    private readonly InputAction m_Player_Loot;
-    private readonly InputAction m_Player_LootSingleItem;
-    private readonly InputAction m_Player_CloseLoot;
+    private readonly InputAction m_Player_CastSkill1;
+    private readonly InputAction m_Player_CastSkill2;
+    private readonly InputAction m_Player_CastSkill3;
+    private readonly InputAction m_Player_CastSkill4;
+    private readonly InputAction m_Player_CastSkill5;
+    private readonly InputAction m_Player_CastSkill6;
     public struct PlayerActions
     {
         private @DefaultInputActions m_Wrapper;
         public PlayerActions(@DefaultInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
-        public InputAction @Loot => m_Wrapper.m_Player_Loot;
-        public InputAction @LootSingleItem => m_Wrapper.m_Player_LootSingleItem;
-        public InputAction @CloseLoot => m_Wrapper.m_Player_CloseLoot;
+        public InputAction @CastSkill1 => m_Wrapper.m_Player_CastSkill1;
+        public InputAction @CastSkill2 => m_Wrapper.m_Player_CastSkill2;
+        public InputAction @CastSkill3 => m_Wrapper.m_Player_CastSkill3;
+        public InputAction @CastSkill4 => m_Wrapper.m_Player_CastSkill4;
+        public InputAction @CastSkill5 => m_Wrapper.m_Player_CastSkill5;
+        public InputAction @CastSkill6 => m_Wrapper.m_Player_CastSkill6;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1253,15 +1461,24 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
                 @Attack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
-                @Loot.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLoot;
-                @Loot.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLoot;
-                @Loot.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLoot;
-                @LootSingleItem.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLootSingleItem;
-                @LootSingleItem.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLootSingleItem;
-                @LootSingleItem.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLootSingleItem;
-                @CloseLoot.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCloseLoot;
-                @CloseLoot.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCloseLoot;
-                @CloseLoot.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCloseLoot;
+                @CastSkill1.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCastSkill1;
+                @CastSkill1.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCastSkill1;
+                @CastSkill1.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCastSkill1;
+                @CastSkill2.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCastSkill2;
+                @CastSkill2.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCastSkill2;
+                @CastSkill2.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCastSkill2;
+                @CastSkill3.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCastSkill3;
+                @CastSkill3.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCastSkill3;
+                @CastSkill3.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCastSkill3;
+                @CastSkill4.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCastSkill4;
+                @CastSkill4.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCastSkill4;
+                @CastSkill4.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCastSkill4;
+                @CastSkill5.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCastSkill5;
+                @CastSkill5.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCastSkill5;
+                @CastSkill5.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCastSkill5;
+                @CastSkill6.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCastSkill6;
+                @CastSkill6.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCastSkill6;
+                @CastSkill6.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCastSkill6;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1272,9 +1489,59 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
-                @Loot.started += instance.OnLoot;
-                @Loot.performed += instance.OnLoot;
-                @Loot.canceled += instance.OnLoot;
+                @CastSkill1.started += instance.OnCastSkill1;
+                @CastSkill1.performed += instance.OnCastSkill1;
+                @CastSkill1.canceled += instance.OnCastSkill1;
+                @CastSkill2.started += instance.OnCastSkill2;
+                @CastSkill2.performed += instance.OnCastSkill2;
+                @CastSkill2.canceled += instance.OnCastSkill2;
+                @CastSkill3.started += instance.OnCastSkill3;
+                @CastSkill3.performed += instance.OnCastSkill3;
+                @CastSkill3.canceled += instance.OnCastSkill3;
+                @CastSkill4.started += instance.OnCastSkill4;
+                @CastSkill4.performed += instance.OnCastSkill4;
+                @CastSkill4.canceled += instance.OnCastSkill4;
+                @CastSkill5.started += instance.OnCastSkill5;
+                @CastSkill5.performed += instance.OnCastSkill5;
+                @CastSkill5.canceled += instance.OnCastSkill5;
+                @CastSkill6.started += instance.OnCastSkill6;
+                @CastSkill6.performed += instance.OnCastSkill6;
+                @CastSkill6.canceled += instance.OnCastSkill6;
+            }
+        }
+    }
+    public PlayerActions @Player => new PlayerActions(this);
+
+    // InGameLoot
+    private readonly InputActionMap m_InGameLoot;
+    private IInGameLootActions m_InGameLootActionsCallbackInterface;
+    private readonly InputAction m_InGameLoot_LootSingleItem;
+    private readonly InputAction m_InGameLoot_CloseLoot;
+    public struct InGameLootActions
+    {
+        private @DefaultInputActions m_Wrapper;
+        public InGameLootActions(@DefaultInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @LootSingleItem => m_Wrapper.m_InGameLoot_LootSingleItem;
+        public InputAction @CloseLoot => m_Wrapper.m_InGameLoot_CloseLoot;
+        public InputActionMap Get() { return m_Wrapper.m_InGameLoot; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(InGameLootActions set) { return set.Get(); }
+        public void SetCallbacks(IInGameLootActions instance)
+        {
+            if (m_Wrapper.m_InGameLootActionsCallbackInterface != null)
+            {
+                @LootSingleItem.started -= m_Wrapper.m_InGameLootActionsCallbackInterface.OnLootSingleItem;
+                @LootSingleItem.performed -= m_Wrapper.m_InGameLootActionsCallbackInterface.OnLootSingleItem;
+                @LootSingleItem.canceled -= m_Wrapper.m_InGameLootActionsCallbackInterface.OnLootSingleItem;
+                @CloseLoot.started -= m_Wrapper.m_InGameLootActionsCallbackInterface.OnCloseLoot;
+                @CloseLoot.performed -= m_Wrapper.m_InGameLootActionsCallbackInterface.OnCloseLoot;
+                @CloseLoot.canceled -= m_Wrapper.m_InGameLootActionsCallbackInterface.OnCloseLoot;
+            }
+            m_Wrapper.m_InGameLootActionsCallbackInterface = instance;
+            if (instance != null)
+            {
                 @LootSingleItem.started += instance.OnLootSingleItem;
                 @LootSingleItem.performed += instance.OnLootSingleItem;
                 @LootSingleItem.canceled += instance.OnLootSingleItem;
@@ -1284,7 +1551,7 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
             }
         }
     }
-    public PlayerActions @Player => new PlayerActions(this);
+    public InGameLootActions @InGameLoot => new InGameLootActions(this);
 
     // UI
     private readonly InputActionMap m_UI;
@@ -1476,11 +1743,13 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Transitions;
     private ITransitionsActions m_TransitionsActionsCallbackInterface;
     private readonly InputAction m_Transitions_ToggleMenu;
+    private readonly InputAction m_Transitions_Loot;
     public struct TransitionsActions
     {
         private @DefaultInputActions m_Wrapper;
         public TransitionsActions(@DefaultInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @ToggleMenu => m_Wrapper.m_Transitions_ToggleMenu;
+        public InputAction @Loot => m_Wrapper.m_Transitions_Loot;
         public InputActionMap Get() { return m_Wrapper.m_Transitions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1493,6 +1762,9 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
                 @ToggleMenu.started -= m_Wrapper.m_TransitionsActionsCallbackInterface.OnToggleMenu;
                 @ToggleMenu.performed -= m_Wrapper.m_TransitionsActionsCallbackInterface.OnToggleMenu;
                 @ToggleMenu.canceled -= m_Wrapper.m_TransitionsActionsCallbackInterface.OnToggleMenu;
+                @Loot.started -= m_Wrapper.m_TransitionsActionsCallbackInterface.OnLoot;
+                @Loot.performed -= m_Wrapper.m_TransitionsActionsCallbackInterface.OnLoot;
+                @Loot.canceled -= m_Wrapper.m_TransitionsActionsCallbackInterface.OnLoot;
             }
             m_Wrapper.m_TransitionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -1500,6 +1772,9 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
                 @ToggleMenu.started += instance.OnToggleMenu;
                 @ToggleMenu.performed += instance.OnToggleMenu;
                 @ToggleMenu.canceled += instance.OnToggleMenu;
+                @Loot.started += instance.OnLoot;
+                @Loot.performed += instance.OnLoot;
+                @Loot.canceled += instance.OnLoot;
             }
         }
     }
@@ -1508,7 +1783,15 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
-        void OnLoot(InputAction.CallbackContext context);
+        void OnCastSkill1(InputAction.CallbackContext context);
+        void OnCastSkill2(InputAction.CallbackContext context);
+        void OnCastSkill3(InputAction.CallbackContext context);
+        void OnCastSkill4(InputAction.CallbackContext context);
+        void OnCastSkill5(InputAction.CallbackContext context);
+        void OnCastSkill6(InputAction.CallbackContext context);
+    }
+    public interface IInGameLootActions
+    {
         void OnLootSingleItem(InputAction.CallbackContext context);
         void OnCloseLoot(InputAction.CallbackContext context);
     }
@@ -1538,5 +1821,6 @@ public partial class @DefaultInputActions : IInputActionCollection2, IDisposable
     public interface ITransitionsActions
     {
         void OnToggleMenu(InputAction.CallbackContext context);
+        void OnLoot(InputAction.CallbackContext context);
     }
 }

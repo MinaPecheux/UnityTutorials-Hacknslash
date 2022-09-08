@@ -21,11 +21,11 @@ namespace Player
             _equipmentCache = new Tools.ItemCache();
         }
 
-        private void OnGUI()
+        private void Start()
         {
-            if (GUI.Button(new Rect(10, 10, 200, 100), "Power Strike"))
+            for (int i = 0; i < _skills.Length; i++)
             {
-                _skills[0].Cast();
+                UI.UIManager.instance.SetSlot(i, _skills[i]);
             }
         }
 

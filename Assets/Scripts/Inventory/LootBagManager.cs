@@ -60,7 +60,7 @@ namespace Inventory
         {
             Inputs.InputManager.InputDeviceType idt =
                 Inputs.InputManager.currentInputDeviceType;
-            string control = Inputs.InputManager.ActionToControl("Player:Loot");
+            string control = Inputs.InputManager.ActionToControl("Transitions:Loot");
             Addressables.LoadAssetAsync<Sprite>($"Assets/InputIcons/{idt}/{control}.png")
                 .Completed += (AsyncOperationHandle<Sprite> obj) =>
                 {

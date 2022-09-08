@@ -24,27 +24,54 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Loot",
+                    "name": "CastSkill1",
                     "type": "Button",
-                    "id": "e3958dd8-9a74-4546-b69e-4ea959f5cc51",
+                    "id": "a7d34436-7ad0-4cd4-9a1e-7d2cd7f05229",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "LootSingleItem",
+                    "name": "CastSkill2",
                     "type": "Button",
-                    "id": "4f8ed300-00c7-4e5f-9ae5-b5e4d67a27e3",
+                    "id": "18b3120e-5d6c-4208-b53f-46b89409c9e6",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "CloseLoot",
+                    "name": "CastSkill3",
                     "type": "Button",
-                    "id": "98c336d7-1696-4dc6-8cba-0d13b26ce603",
+                    "id": "07584a95-9c8f-487a-9f6d-050305e61132",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CastSkill4",
+                    "type": "Button",
+                    "id": "f2de5add-3f4f-4d30-bebf-61d67bc0bf25",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CastSkill5",
+                    "type": "Button",
+                    "id": "329dc8f1-8c97-4b5c-8112-de20bb26b742",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CastSkill6",
+                    "type": "Button",
+                    "id": "f10390f0-5881-40e1-8bee-23f4a32e2e37",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -197,29 +224,165 @@
                 },
                 {
                     "name": "",
-                    "id": "43b2398a-884b-4935-9dcb-474e441bfd8b",
+                    "id": "de3a00ee-867a-40ab-bbd2-6b8a64ec0ef1",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CastSkill1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f116a1a1-96b3-4ff2-8a00-ef332aab0a51",
                     "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Loot",
+                    "action": "CastSkill1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "ef2435a0-dd03-4a0d-a6cc-769cd2b0b8ee",
-                    "path": "<Mouse>/rightButton",
+                    "id": "38d63e26-9bf3-4c6d-83cc-28213f7ebca3",
+                    "path": "<Keyboard>/3",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Loot",
+                    "action": "CastSkill3",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "e2d231aa-3b10-4e66-ac9a-b70a963c598e",
+                    "id": "ecee8476-d015-4049-9180-03f2bcb588f5",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CastSkill3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "875608fd-aa78-4599-b62c-472d633ebc07",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CastSkill2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "81b6abb4-1750-4545-a347-e182e42f100b",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CastSkill2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "032ceb29-c6a4-4738-8bb8-8762728344c1",
+                    "path": "<Keyboard>/6",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CastSkill6",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b373c274-ccea-49cf-96be-7943e4a9c20a",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CastSkill6",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5554b7c7-6578-4fab-bc68-9c6ac1505967",
+                    "path": "<Keyboard>/5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CastSkill5",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0004b3c0-442f-4541-81fb-1c26ae7348d4",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CastSkill5",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "319eacec-261c-4ae5-819f-8dde450bfb72",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CastSkill4",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9bc254c5-1f6a-46f6-a171-a0521f74d35e",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CastSkill4",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "InGameLoot",
+            "id": "bf44d5ab-c335-4c56-b6e6-03f8f9a5bfd6",
+            "actions": [
+                {
+                    "name": "LootSingleItem",
+                    "type": "Button",
+                    "id": "0c111682-25f6-480f-b137-970ad85b9e93",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CloseLoot",
+                    "type": "Button",
+                    "id": "57d4651f-cda7-4dcd-ba71-e9143f88e0cf",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "85a393a2-148c-48ca-b3e4-4d18ad6ec011",
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
@@ -230,7 +393,7 @@
                 },
                 {
                     "name": "",
-                    "id": "109c724e-7c91-43a1-8adc-5087e8d7bffb",
+                    "id": "bf6a6755-875b-4654-bb49-a9e3b89e94db",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
@@ -241,7 +404,7 @@
                 },
                 {
                     "name": "",
-                    "id": "cc9a6d7d-3be8-4ed9-b884-f27ed486b3c6",
+                    "id": "840d6787-7aae-4dc8-b602-fb98d0af4500",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
@@ -252,7 +415,7 @@
                 },
                 {
                     "name": "",
-                    "id": "2df54334-2a98-4334-b7f9-bdf5229cc9c6",
+                    "id": "95dfdd45-1bb7-4cdd-8748-055188a1cdf0",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
@@ -1082,6 +1245,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Loot",
+                    "type": "Button",
+                    "id": "09f04738-b5f8-4a1f-a16f-4bdf551218d5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1104,6 +1276,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "ToggleMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6415d2c1-1160-40fc-88a9-dedcb96aa6a0",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Loot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5e334c68-ecf9-4637-b99f-8ed890de4df7",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Loot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
