@@ -80,11 +80,6 @@ namespace Inventory
         private LootBagManager _closestLootBag = null;
         private List<Transform> _lootBagsInSight = new List<Transform>();
 
-        [SerializeField] private InventoryItemData _testItem;
-        [SerializeField] private InventoryItemData _testItem2;
-        [SerializeField] private InventoryItemData _testItem3;
-        [SerializeField] private InventoryItemData _testItem4;
-
         void Start()
         {
             _player = GameObject.FindGameObjectWithTag("Player");
@@ -212,11 +207,6 @@ namespace Inventory
         {
             _playerData = Tools.AddressablesLoader.instance.playerData;
             _inventoryMaxWeight = _playerData.inventoryMaxWeight;
-
-            AddItem(_testItem, 1);
-            AddItem(_testItem2, 1);
-            AddItem(_testItem3, 1);
-            AddItem(_testItem4, 1);
         }
 
         private void _OnItemSelected((int, Transform) data)
@@ -412,9 +402,9 @@ namespace Inventory
                 Inputs.InputManager.InputActions.InGameLoot);
             UI.InputDisplayers.instance.SetDisplays(new (string, string)[]
             {
-                ("Close", "Player:CloseLoot"),
+                ("Close", "InGameLoot:CloseLoot"),
                 ("Navigate", "UI:Navigate"),
-                ("Loot Single", "Player:LootSingleItem"),
+                ("Loot Single", "InGameLoot:LootSingleItem"),
             });
             inLootPanel = true;
         }
