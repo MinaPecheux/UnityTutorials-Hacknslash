@@ -59,4 +59,6 @@ You can find the list of all tutorials [on Medium](https://mina-pecheux.medium.c
 
 <li>Tutorial #24: <a rel="noopener follow" href="https://mina-pecheux.medium.com/making-a-hackn-slash-24-adding-some-skills-and-powers-2-2-4032ec4ac117"><strong>Adding some skills and powers! 2/2</strong></a></li>
 
+<li>Tutorial #25: <a rel="noopener follow" href="https://mina-pecheux.medium.com/making-a-hackn-slash-25-final-notes-sum-up-9f330ef686ec"><strong>Final notes & sum-up</strong></a></li>
+
 </ul>
